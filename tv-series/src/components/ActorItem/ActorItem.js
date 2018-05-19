@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 const ActorItem = ({thumbnail, name}) => (
   <div className={cx('ActorItem')}>
     <div className={cx('thumbnail')}>
-      <img src={thumbnail} alt="thumbnail-actor"/>
+      <img src={`/uploads/${thumbnail}`} alt="thumbnail-actor"/>
     </div>
     <div className={cx('name')}>
       {name}

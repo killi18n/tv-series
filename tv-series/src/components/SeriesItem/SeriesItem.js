@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 const SeriesItem = ({ id, thumbnail, name }) => (
   <Link to={`/series/${id}`} className={cx('list')}>
     <div className={cx('thumbnail')}>
-      <img src={thumbnail} alt="thumbnail-series" />
+      <img src={`/uploads/${thumbnail}`} alt="thumbnail-series" />
     </div>
     <div className={cx('title')}>
       {name}

@@ -3,6 +3,7 @@ import styles from './EpisodeItemList.scss';
 import classNames from 'classnames/bind';
 import EpisodeItem from 'components/EpisodeItem/EpisodeItem';
 import LoadMoreEpisode from 'components/LoadMoreEpisode/LoadMoreEpisode';
+import YouTube from 'react-youtube';
 
 const cx = classNames.bind(styles);
 
@@ -16,37 +17,43 @@ class EpisodeItemList extends Component {
   }
 
   handleLoadMore = () => {
-    const { episodes } = this.props;
+    const { teasers } = this.props;
     const { limit } = this.state;
 
     const nextLimit = limit + 3;
 
     this.setState({
-      limit: nextLimit > episodes.length ? episodes.length : nextLimit
+      limit: nextLimit > teasers.length ? teasers.length : nextLimit
     });
   }
 
   render() {
-    const { episodes } = this.props;
+    const { teasers } = this.props;
     const { limit } = this.state;
-
-    const episodeList = episodes.slice(0, limit).map(
-      episode => (
-       <EpisodeItem
-        thumbnail={episode.img}
-        name={episode.name}
-        key={episode.id}
-        id={episode.id}
-        onClick={this.handlePlayEpisode}
-        /> 
+    const opts = {
+      height: '100%',
+      width: '100%',
+      playerVars: { 
+        autoplay: 0
+      }
+    };
+    if(teasers === undefined) return null;
+    const teaserList = teasers.slice(0, limit).map(
+      teaser => (
+        <YouTube
+          key={teaser._id}
+          videoId={teaser.videoId}
+          opts={opts}
+          onReady={this._onReady}
+        />
       )
     )
 
     return (
       <div className={cx('EpisodeItemList')}>
-        {episodeList}
+        {teaserList}
         {
-          episodes.length !== limit && (
+          teasers.length !== limit && (
             <LoadMoreEpisode onClick={this.handleLoadMore} />
           )
         }

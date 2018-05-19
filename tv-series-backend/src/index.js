@@ -34,9 +34,9 @@ const router = new Router();
 
 router.use('/api', api.routes());
 
+app.use(koaBody({multipart: true}));
 app.use(bodyParser());
 app.use(jwtMiddleware);
-app.use(koaBody({multipart: true}));
 app.use(mount('/uploads', serve(path.join(__dirname + uploadDirPath))));
 
 const sessionConfig = {

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const CategoryItem = ({ thumbnail, name }) => (
-  <Link to="/series/1" className={cx('OneLine')}>
+const CategoryItem = ({ thumbnail, name, id }) => (
+  <Link to={`/series/${id}`} className={cx('OneLine')}>
     <div className={cx('left')}>
       <div className={cx('thumbnail')}>
-        <img src={thumbnail} alt="thumbnail-category" />
+        <img src={`/uploads/${thumbnail}`} alt="thumbnail-category" />
       </div>
     </div>
     <div className={cx('right')}>

@@ -5,11 +5,17 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const PageFooter = () => (
+const PageFooter = ({admin}) => (
   <div className={cx('footer')}>
     <Link to="/" className={cx('logo')}>
       Fresh Tomato
     </Link>
+    {
+      admin &&
+      <Link to="/editor" className={cx('admin')}>
+        포스트 작성
+      </Link>
+    }
   </div>
 );
 

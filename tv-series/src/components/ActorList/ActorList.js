@@ -28,11 +28,12 @@ class ActorList extends Component {
     const { limit } = this.state;
     const { actors } = this.props;
     const { handleLoadMore } = this;
+    if(actors === undefined) return null;
     const actorList = actors.slice(0, limit).map(
       actor => (
         <ActorItem
-          key={actor.id}
-          id={actor.id}
+          key={actor._id}
+          id={actor._id}
           thumbnail={actor.img}
           name={actor.name}
           />

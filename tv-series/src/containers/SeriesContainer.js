@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 // import * as seriesActions from 'store/modules/series';
 import * as baseActions from 'store/modules/base';
+import * as listActions from 'store/modules/list';
 import SeriesTemplate from 'components/SeriesTemplate/SeriesTemplate';
 import SeriesMain from 'components/SeriesMain/SeriesMain';
 import SeriesHeader from 'components/SeriesHeader/SeriesHeader';
@@ -14,30 +15,48 @@ class SeriesContainer extends Component {
         const { BaseActions } = this.props;
         BaseActions.showSideBar();
     }
+
+    getSeries = async () => {
+        const { ListActions, id } = this.props;
+
+        try {
+            await ListActions.getSeriesById({id});
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    componentDidMount() {
+        this.getSeries();
+    }
+
     render() {
         const { showSideBar } = this;
-        const { id } = this.props;
-        const series = data.series.find(
-            series => {
-                return series.id === parseInt(id, 10);
-            }
-        );
+        const { id, series } = this.props;
+        // const series = data.series.find(
+        //     series => {
+        //         return series.id === parseInt(id, 10);
+        //     }
+        // );
 
-        const seriesDetail = series.detail;
+        // const seriesDetail = series.detail;
+        // if(series)
+        if(series === undefined) return null;
         return (
             <SeriesTemplate>
                 <SeriesHeader
-                    thumbnail={seriesDetail.img}
-                    name={seriesDetail.name}
-                    genres={seriesDetail.genres}
-                    startYear={seriesDetail.start_year}
-                    endYear={seriesDetail.end_year}
+                    thumbnail={series.thumbnail}
+                    name={series.name}
+                    genres={series.genre}
+                    startYear={series.startYear}
+                    endYear={series.endYear}
                     onClickMenu={showSideBar}
                     onClickPlayNow={this.handleClickPlayNow} />
                 <SeriesMain
-                    story={seriesDetail.story}
-                    episodes={seriesDetail.episodes}
-                    actors={seriesDetail.actors} />
+                    id={id}
+                    story={series.story}
+                    teasers={series.teasers}
+                    actors={series.actors} />
                 <SideBarContainer/>
             </SeriesTemplate>
         )
@@ -45,9 +64,11 @@ class SeriesContainer extends Component {
 }
 export default connect(
     (state) => ({
+        series: state.list.get('series')
     }),
     (dispatch) => ({
         // SeriesActions: bindActionCreators(seriesActions, dispatch),
-        BaseActions: bindActionCreators(baseActions, dispatch)
+        BaseActions: bindActionCreators(baseActions, dispatch),
+        ListActions: bindActionCreators(listActions, dispatch)
     })
 )(SeriesContainer);

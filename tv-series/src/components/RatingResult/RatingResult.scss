@@ -1,0 +1,46 @@
+
+@import 'common';
+
+.RatingResult {
+    display: flex;
+    flex-direction: column;
+    .bar {
+        background: white;
+        height: 3rem;
+        border-radius: 3px;
+        flex: 1;
+        display: flex;
+        .liked {
+            // flex: 0.7;
+            background: $oc-blue-6;
+            display: flex;
+            border-radius: 3px;
+            justify-content: center;
+            align-items: center;
+            .text {
+                font-size: 1.3rem;
+                color: white;
+            }
+        }
+        .hated {
+            // flex: 0.3;
+            display: flex;
+            border-radius: 3px;
+            background: $oc-red-6;
+            justify-content: center;
+            align-items: center;
+            .text {
+                font-size: 1.3rem;
+                color: white;
+            }
+        }
+    }
+
+    .desc {
+        margin-top: 1rem;
+        .item {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+    }
+}

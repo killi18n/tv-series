@@ -1,0 +1,29 @@
+
+@import 'common';
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+
+        user-select: none;
+        cursor: pointer;
+
+
+        &:hover {
+            transform: scale(1.2);
+        }
+        &:active {
+            transform: scale(1.5);
+        }
+
+
+    }
+}

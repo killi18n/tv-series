@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 class SeriesList extends Component {
   render() {
-    const { series } = this.props;
+    const { series, top4Rated, brand4 } = this.props;
     const seriesList = series.map(
       series => (
         <SeriesItem
@@ -16,7 +16,32 @@ class SeriesList extends Component {
           thumbnail={series.img}
           name={series.name} />
       )
-    )
+    );
+
+
+    const top4List = top4Rated.map(
+      (list, i) => {
+        return (
+          <SeriesItem
+            id={list.get("_id")}
+            key={list.get("_id")}
+            thumbnail={list.get("thumbnail")}
+            name={list.get("name")}/>
+        )
+      }
+    );
+
+    const brand4List = brand4.map(
+      (list, i) => {
+        return (
+          <SeriesItem
+            id={list.get("_id")}
+            key={list.get("_id")}
+            thumbnail={list.get("thumbnail")}
+            name={list.get("name")}/>
+        )
+      }
+    );
     return (
       <div className={cx('SeriesList')}>
         <div className={cx('label')}>
@@ -29,12 +54,12 @@ class SeriesList extends Component {
         </div>
         <div className={cx('ListWrapper')}>
           {
-            seriesList
+            top4List
           }
         </div>
         <div className={cx('label')}>
           <div className={cx('left-label')}>
-            Top-Rated Series
+            Brand New Seires
         </div>
           <div className={cx('right-label')}>
             View All
@@ -42,7 +67,7 @@ class SeriesList extends Component {
         </div>
         <div className={cx('ListWrapper')}>
           {
-            seriesList
+            brand4List
           }
         </div>
       </div>

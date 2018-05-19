@@ -3,7 +3,7 @@ import styles from './ListPageTemplate.scss';
 import classNames from 'classnames/bind';
 import SideBarContainer from 'containers/SideBarContainer';
 import ListHeaderContainer from 'containers/ListHeaderContainer';
-import PageFooter from 'components/PageFooter/PageFooter';
+import FooterContainer from 'containers/FooterContainer';
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +13,7 @@ const ListPageTemplate = ({ children }) => (
     <main>
     {children}
     </main>
-    <PageFooter/>
+    <FooterContainer/>
     <SideBarContainer/>
   </div>
 );

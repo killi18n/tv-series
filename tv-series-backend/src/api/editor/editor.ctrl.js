@@ -15,7 +15,12 @@ exports.uploadImage = async (ctx) => {
 }
 
 exports.deleteImage = async (ctx) => {
-    const {imageName} = ctx.request.body;
-    console.log(imageName);
-    ctx.body = imageName;
+    const {image} = ctx.request.body;
+    if(!fs.existsSync(path.join(__dirname + uploadDirPath, image))) {
+        ctx.status = 204;
+        return;
+    }
+    fs.unlinkSync(path.join(__dirname + uploadDirPath, image));
+    ctx.status = 204;
+    return;
 }

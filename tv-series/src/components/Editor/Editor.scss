@@ -1,0 +1,113 @@
+
+@import 'common';
+
+.editor {
+    width: 1024px;
+    margin: 0 auto;
+    @include media("<=medium") {
+        width: 100%;
+    }
+    .contents {
+        padding: 2rem;
+        margin-bottom: 3rem;
+        display: flex;
+        flex-direction: column;
+
+        .imageList {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1rem;
+            .text {
+                font-size: 1.25rem;
+                display: flex;
+
+    
+            }
+
+            
+
+            .text + .text {
+                margin-top: 0.75rem;
+            }
+        }
+
+        .content {
+            .label {
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+
+            .input-wrapper {
+                display: flex;
+                .input {
+                    flex: 1;
+                    height: 2rem;
+                    font-size: 1.5rem;
+                    outline: none;
+                    border: 1px solid $oc-gray-6;
+                }
+            }
+
+            .button-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .button {
+                    text-align: center;
+                    flex: 1;
+                    color: white;
+                    background: $oc-blue-5;
+                    user-select: none;
+                    padding-top: 0.3rem;
+                    padding-bottom: 0.3rem;
+                    &:hover {
+                        background: $oc-blue-6;
+                    }
+                    &:active {
+                        background: $oc-blue-7;
+                    }
+                }
+            }
+
+            .textarea {
+                height: 5rem;
+                flex: 1;
+                font-size: 1.25rem;
+                outline: none;
+                border: 1px solid $oc-gray-6;
+            }
+            .label + .input-wrapper {
+                margin-top: 1rem;
+            }
+
+        }
+
+        .content + .content {
+            margin-top: 2rem;
+        }
+
+
+
+        .button-wrapper {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .button {
+                text-align: center;
+                flex: 1;
+                color: white;
+                background: $oc-blue-5;
+                user-select: none;
+                padding-top: 0.3rem;
+                padding-bottom: 0.3rem;
+                &:hover {
+                    background: $oc-blue-6;
+                }
+                &:active {
+                    background: $oc-blue-7;
+                }
+            }
+        }
+    }
+}

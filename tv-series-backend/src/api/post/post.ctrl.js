@@ -14,7 +14,6 @@ exports.checkObjectId = async (ctx, next) => {
 
 exports.create = async (ctx) => {
     const { name, teasers, actors, story, thumbnail, genre, startYear, endYear } = ctx.request.body;
-    console.log(ctx.request.body.startYear);
     let post = null;
 
     try {

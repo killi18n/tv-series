@@ -5,7 +5,6 @@ const Post = require('models/Post');
 exports.rate = async (ctx) => {
     // console.log(ctx.request.body);
     const { postId, what, email } = ctx.request.body;
-
     let account = null;
 
     try {

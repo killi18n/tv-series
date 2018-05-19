@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
+import * as authActions from 'store/modules/auth';
 import SideBarWrapper from 'components/SideBarWrapper/SideBarWrapper';
 import SideBar from 'components/SideBar/SideBar';
 import onClickOutside from "react-onclickoutside";
+import storage from 'lib/storage';
 
 
 class SideBarContainer extends Component {
@@ -18,22 +20,39 @@ class SideBarContainer extends Component {
         const { BaseActions } = this.props;
         BaseActions.hideSideBar();
     }
+
+    logout = async () => {
+        const { AuthActions } = this.props;
+
+        try {
+            await AuthActions.logout();
+            storage.remove('loggedInfo');
+            window.location.href="/";
+        } catch(e) {
+            console.log(e);
+        }
+    }
     
+
+
+
     render() {
-        const { sideBarVisible } = this.props;
-        const { hideSideBar } = this;
+        const { sideBarVisible, logged } = this.props;
+        const { hideSideBar, logout } = this;
         return (
             <SideBarWrapper visible={sideBarVisible}>
-                <SideBar onHide={hideSideBar}/>
+                <SideBar onHide={hideSideBar} logged={logged} onLogout={logout}/>
             </SideBarWrapper>
         )
     }
 }
 export default connect(
     (state) => ({
-        sideBarVisible: state.base.get('sideBarVisible')
+        sideBarVisible: state.base.get('sideBarVisible'),
+        logged: state.auth.get('logged')
     }),
     (dispatch) => ({
-        BaseActions: bindActionCreators(baseActions, dispatch)
+        BaseActions: bindActionCreators(baseActions, dispatch),
+        AuthActions: bindActionCreators(authActions, dispatch),
     })
 )(onClickOutside(SideBarContainer));
