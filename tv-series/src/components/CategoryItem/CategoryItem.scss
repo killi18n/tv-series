@@ -1,0 +1,62 @@
+
+@import 'common';
+
+.OneLine {
+    @include material-shadow(4, 0.5);
+    display: flex;
+    background: white;
+    margin-left: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    .left {
+        // padding: 1rem;
+        .thumbnail {
+            img {
+                width: 250px;
+                height: 250px;
+
+                @include media("<=medium") {
+                    width: 110px;
+                    height: 110px;
+                }
+            }
+            margin-left: 1rem;
+        }
+    }
+
+    .right {
+        padding-bottom: 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        .title {
+            font-size: 2rem;
+            font-weight: 500; 
+
+            @include media("<=medium") {
+                font-size: 1rem;
+                font-weight: 500;
+            }
+        }
+
+        .actors {
+            font-size: 1.5rem;
+            font-weight: 500; 
+
+            @include media("<=medium") {
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+        }
+
+        .title + .actors {
+            margin-top: 1rem;
+        }
+    }
+}
+
+.OneLine + .OneLine {
+    // border-top: 1px solid black;
+    margin-top: 1rem;
+    
+}

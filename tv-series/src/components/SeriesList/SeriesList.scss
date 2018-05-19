@@ -1,0 +1,87 @@
+
+@import 'common';
+
+.SeriesList {
+    width: 1024px;
+    @include media("<=medium") {
+        width: 100%;
+    }
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    .label {
+        display: flex;
+        align-items: center;
+        .left-label {
+            font-size: 1.5rem;
+            font-weight: 600;
+            padding: 1rem;
+        }
+
+        .right-label {
+            margin-left: auto;
+            margin-right: 1rem;
+            color: #91a7ff;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+    .ListWrapper {
+        display: flex;
+        white-space: no-wrap;
+        overflow-x: auto;
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+        .list {
+            @include material-shadow(4, 0.5);
+            cursor: pointer;
+            display: flex;
+            
+            flex-direction: column;
+            // padding-left: 1rem;
+            // padding-right: 1rem;
+            // margin: 1rem;
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
+            margin-bottom: 1rem;
+            background: white;
+            width: 280px;
+            height: 420px;
+            padding: 1rem;
+            @include media("<=medium") {
+                height: 190px;
+                padding: 0;
+            }
+            
+            .thumbnail {
+                img {
+                    width: 250px;
+                    height: 350px;
+                    @include media("<=medium") {
+                        width: 110px;
+                        height: 150px;
+                    }
+                }
+
+                
+            }
+    
+    
+            .title {
+                user-select: none;
+                font-size: 1.5rem;
+                font-weight: 500;
+                padding-left: 0.35rem;
+                padding-top: 0.35rem;
+                padding-bottom: 0.35rem;
+
+                @include media("<=medium") {
+                    font-size: 0.75rem;
+                    
+                }
+            }
+        }
+    }
+
+    
+}

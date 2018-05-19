@@ -1,0 +1,29 @@
+
+@import 'common';
+
+.SideBar {
+    
+    .contents {
+        display: flex;
+        flex-direction: column;
+        .menu {
+            .text {
+                font-size: 1.3rem;
+                font-weight: 500;
+                color: white;
+            }
+            padding: 1rem;
+            user-select: none;
+            cursor: pointer;
+
+            &:active {
+                background: #fab005;
+            }
+        }
+
+        .menu + .menu {
+            border-top: 1px solid white;
+
+        }
+    }
+}

@@ -1,0 +1,34 @@
+@import 'common';
+
+.ListPageHeader {
+    background: #dea326;
+    .contents {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 5rem;
+
+
+        .logo {
+            margin-left: 1rem;
+            color: white;
+            font-weight: 800;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .menu-wrapper {
+            margin-left: auto;
+            margin-right: 1rem;
+            .menu-button {
+                
+                font-size: 2rem;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+
+    
+}

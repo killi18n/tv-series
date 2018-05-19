@@ -1,0 +1,28 @@
+
+@import 'common';
+
+
+.CategoryList {
+   
+    width: 1024px;
+    @include media("<=medium") {
+        width: 100%;
+    }
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    .label {
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-left: 1rem;
+    }
+
+    .wrapper {
+        // background: white;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        
+    }
+}
