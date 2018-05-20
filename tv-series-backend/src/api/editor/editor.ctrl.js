@@ -2,6 +2,22 @@ const fs = require('fs');
 const path = require('path');
 const uploadDirPath = '../../../uploads';
 
+exports.checkAdmin = async (ctx, next) => {
+    const token = ctx.cookies.get('access_token');
+
+    const decoded = await decodeToken(token);
+
+    const { admin } = decoded;
+
+    if (!admin) {
+        ctx.status = 401;
+        return;
+    }
+
+    return next();
+
+}
+
 exports.uploadImage = async (ctx) => {
     if(!ctx.request.body.files.image) {
         ctx.status = 204;
