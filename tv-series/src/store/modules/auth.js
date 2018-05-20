@@ -44,9 +44,10 @@ export default handleActions({
     ...pender({
         type: LOGIN, 
         onSuccess: (state, action) => {
-            const { email } = action.payload.data;
+            const { email, admin } = action.payload.data;
             storage.set('loggedInfo', email);
-            return state.set('logged', true);
+            return state.set('logged', true)
+                        .set('admin', admin);
         },
         onError: (state, action) => {
             return state.set('error', '잘못된 로그인 입니다.');

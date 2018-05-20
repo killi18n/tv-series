@@ -9,12 +9,14 @@ const GET_TOP4_RATED = 'list/GET_TOP4_RATED';
 const GET_BRAND4 = 'list/GET_BRAND4';
 const GET_SERIES_BY_ID = 'list/GET_SERIES_BY_ID';
 const GET_ALL = 'list/GET_ALL';
+const INITIALIZE_SERIES = 'list/INITIALIZE_SERIES';
 
 // action creator
 export const getTop4Rated = createAction(GET_TOP4_RATED, api.getTop4Rated);
 export const getBrand4 = createAction(GET_BRAND4, api.getBrand4);
 export const getSeriesById = createAction(GET_SERIES_BY_ID, api.getSeriesById);
 export const getAll = createAction(GET_ALL, api.getAll);
+export const initializeSeries = createAction(INITIALIZE_SERIES);
 
 // initial state
 const initialState = Map({
@@ -27,6 +29,9 @@ const initialState = Map({
 
 // reducer
 export default handleActions({
+    [INITIALIZE_SERIES]: (state, action) => {
+        return state.set('series', Map({}));
+    },
     ...pender({
         type: GET_TOP4_RATED,
         onSuccess: (state, action) => {

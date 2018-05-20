@@ -8,10 +8,10 @@ import * as listActions from 'store/modules/list';
 class CategoryListContainer extends Component {
 
     getAll = async () => {
-        const { ListActions } = this.props;
+        const { ListActions, page, category } = this.props;
 
         try {
-            await ListActions.getAll();
+            await ListActions.getAll({page, genre: category});
         } catch (e) {
             console.log(e);
         }
@@ -19,6 +19,13 @@ class CategoryListContainer extends Component {
 
     componentDidMount() {
         this.getAll();
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.page !== this.props.page || prevProps.category !== this.props.category) {
+            this.getAll();
+            document.documentElement.scrollTop = 0;
+        }
     }
 
     render() {

@@ -16,11 +16,11 @@ const SeriesMain = ({ teasers, story, actors, id }) => (
       <div className={cx('content')}>
         <section>
           <h2>평가 하기</h2>
-          <RatingContainer id={id}/>
+          <RatingContainer id={id} />
         </section>
         <section>
-            <h2>Rating</h2>
-            <RatingResultContainer id={id}/>
+          <h2>Rating</h2>
+          <RatingResultContainer id={id} />
         </section>
         <section>
           <h2>티저 영상</h2>
@@ -28,7 +28,7 @@ const SeriesMain = ({ teasers, story, actors, id }) => (
         </section>
         <section>
           <h2>배우</h2>
-          <ActorList actors={actors}/>
+          <ActorList actors={actors} />
         </section>
         <section>
           <h2>줄거리</h2>

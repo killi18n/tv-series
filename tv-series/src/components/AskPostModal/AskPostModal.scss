@@ -1,0 +1,85 @@
+
+@import 'common';
+
+
+.question {
+    background: white;
+    padding: 2rem;
+    .title {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    .description {
+      margin-top: 0.25rem;
+    }
+  }
+  
+  .options {
+    padding: 1rem;
+    background: $oc-gray-1;
+    text-align: right;
+
+    display: flex;
+    justify-content: center;
+
+    .button {
+        
+        display: flex;
+        
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+
+        &.update {
+            background: $oc-blue-5;
+
+            &:hover {
+                background: $oc-blue-6;
+
+            }
+
+            &:active {
+                background: $oc-blue-7;
+            }
+        }
+
+        &.remove {
+            background: $oc-red-5;
+
+            &:hover {
+                background: $oc-red-6;
+
+            }
+
+            &:active {
+                background: $oc-red-7;
+            }
+        }
+
+        &.cancel {
+            background: $oc-gray-5;
+
+            &:hover {
+                background: $oc-gray-6;
+
+            }
+
+            &:active {
+                background: $oc-gray-7;
+            }
+        }
+
+        user-select: none;
+        cursor: pointer;
+
+        .text {
+            color: white;
+
+        }
+
+    }
+    .button + .button {
+        margin-left: 1rem;
+    }
+  }

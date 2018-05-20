@@ -5,12 +5,14 @@ import * as api from 'lib/api';
 import { pender } from 'redux-pender';
 
 // action types
+const INITIALIZE = 'rate/INITIALIZE';
 const GET_RATING_OF_ITEM = 'rate/GET_RATING_OF_ITEM';
 const GET_RATED_LIST = 'rate/GET_RATED_LIST';
 const RATE = 'rate/RATE';
 const SET_SELECTED = 'rate/SET_SELECTED';
 
 // action creator
+export const initialize = createAction(INITIALIZE);
 export const getRatingOfItem = createAction(GET_RATING_OF_ITEM, api.getRatingOfItem);
 export const getRatedList = createAction(GET_RATED_LIST, api.getRatedList);
 export const rate = createAction(RATE, api.rate);
@@ -30,6 +32,7 @@ const initialState = Map({
 
 // reducer
 export default handleActions({
+    [INITIALIZE]: (state, action) => initialState,
     ...pender({
         type: GET_RATING_OF_ITEM,
         onSuccess: (state, action) => {

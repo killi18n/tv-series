@@ -3,6 +3,10 @@ const path = require('path');
 const uploadDirPath = '../../../uploads';
 
 exports.uploadImage = async (ctx) => {
+    if(!ctx.request.body.files.image) {
+        ctx.status = 204;
+        return;
+    }
     const file = ctx.request.body.files.image;
     const storageFileName = Math.random().toString();
     const reader = fs.createReadStream(file.path);

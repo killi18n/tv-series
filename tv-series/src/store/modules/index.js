@@ -4,3 +4,4 @@ export { default as auth } from './auth';
 export { default as editor } from './editor';
 export { default as list } from './list';
 export { default as rate } from './rate';
+export { default as post } from './post';

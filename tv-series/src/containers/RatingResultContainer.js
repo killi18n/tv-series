@@ -11,7 +11,7 @@ class RatingResultContainer extends Component {
 
         try {
             await RateActions.getRatingOfItem({id});
-            console.log(this.props.hit);
+            // console.log(this.props.hit);
         } catch(e) {
             console.log(e);
         }

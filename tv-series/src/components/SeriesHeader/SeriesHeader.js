@@ -7,8 +7,17 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const SeriesHeader = ({ thumbnail, name, genres, startYear, endYear, onClickMenu, onClickPlayNow }) => {
-  if(genres === undefined) return null;
+const SeriesHeader = ({
+  thumbnail,
+  name,
+  genres,
+  startYear,
+  endYear,
+  onClickMenu,
+  onClickPlayNow,
+  admin,
+  showPostModal }) => {
+  if (genres === undefined) return null;
   return (
     <div className={cx('SeriesHeader')}>
       <div className={cx('wrapper')}>
@@ -26,13 +35,23 @@ const SeriesHeader = ({ thumbnail, name, genres, startYear, endYear, onClickMenu
             <div>
               <h1>{name}</h1>
               <div className={cx("sub-info")}>
-                <span>{genres.join(' / ')}</span>
+                <span>
+                  
+                {genres.map(
+                  (genre, i) => {
+                    return <Link to={`/list/${genre}`} key={genre}>{"#" + genre}</Link>
+                  }
+                )}
+                </span>
                 <span>{startYear}-{endYear}</span>
               </div>
             </div>
-            <div className={cx("play-button")} onClick={onClickPlayNow}>
-              <PlayIcon /> 지금 재생하기
-            </div>
+            {
+              admin &&
+              <div className={cx("play-button")} onClick={showPostModal}>
+                수정 / 삭제
+              </div>
+            }
           </div>
         </div>
       </div>

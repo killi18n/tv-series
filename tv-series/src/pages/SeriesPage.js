@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SeriesContainer from 'containers/SeriesContainer';
+import AskPostModalContainer from 'containers/AskPostModalContainer';
 
-const SeriesPage = ({match}) => {
+const SeriesPage = ({ match }) => {
     const { id } = match.params;
     return (
-        <SeriesContainer id={id}/>
+        <Fragment>
+            <SeriesContainer id={id} />
+            <AskPostModalContainer id={id} />
+        </Fragment>
     );
 };
 

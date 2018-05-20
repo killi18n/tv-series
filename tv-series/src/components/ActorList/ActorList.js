@@ -45,7 +45,7 @@ class ActorList extends Component {
         actorList
       }
       {
-        actors.length !== limit && 
+        actors.length > limit && 
         <LoadMoreEpisode onClick={handleLoadMore}/>
       }
         

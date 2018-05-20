@@ -35,6 +35,8 @@ function decodeToken(token) {
     );
 }
 
+exports.decodeToken = decodeToken;
+
 exports.jwtMiddleware = async (ctx, next) => {
     const token = ctx.cookies.get('access_token'); // ctx 에서 access_token 을 읽어옵니다
     if(!token) return next(); // 토큰이 없으면 바로 다음 작업을 진행합니다.

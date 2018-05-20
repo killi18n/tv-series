@@ -16,6 +16,11 @@ class SeriesContainer extends Component {
         BaseActions.showSideBar();
     }
 
+    showPostModal = () => {
+        const { BaseActions } = this.props;
+        BaseActions.showPostModal();
+    }
+
     getSeries = async () => {
         const { ListActions, id } = this.props;
 
@@ -26,21 +31,23 @@ class SeriesContainer extends Component {
         }
     }
 
+    initializeSeries = () => {
+        const { ListActions } = this.props;
+        ListActions.initializeSeries();
+    }
+
     componentDidMount() {
         this.getSeries();
     }
 
-    render() {
-        const { showSideBar } = this;
-        const { id, series } = this.props;
-        // const series = data.series.find(
-        //     series => {
-        //         return series.id === parseInt(id, 10);
-        //     }
-        // );
+    // componentWillUnmount() {
+    //     this.initializeSeries();
+    // }
 
-        // const seriesDetail = series.detail;
-        // if(series)
+    render() {
+        const { showSideBar, showPostModal } = this;
+        const { id, series, admin } = this.props;
+
         if(series === undefined) return null;
         return (
             <SeriesTemplate>
@@ -51,7 +58,9 @@ class SeriesContainer extends Component {
                     startYear={series.startYear}
                     endYear={series.endYear}
                     onClickMenu={showSideBar}
-                    onClickPlayNow={this.handleClickPlayNow} />
+                    onClickPlayNow={this.handleClickPlayNow}
+                    admin={admin}
+                    showPostModal={showPostModal} />
                 <SeriesMain
                     id={id}
                     story={series.story}
@@ -64,7 +73,8 @@ class SeriesContainer extends Component {
 }
 export default connect(
     (state) => ({
-        series: state.list.get('series')
+        series: state.list.get('series'),
+        admin: state.auth.get('admin')
     }),
     (dispatch) => ({
         // SeriesActions: bindActionCreators(seriesActions, dispatch),

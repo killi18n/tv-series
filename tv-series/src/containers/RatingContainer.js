@@ -5,8 +5,14 @@ import { bindActionCreators } from 'redux';
 import * as rateActions from 'store/modules/rate';
 import Rating from 'components/Rating/Rating';
 import storage from 'lib/storage';
+import { withRouter } from 'react-router-dom';
 
 class RatingContainer extends Component {
+    
+    initialize = () => {
+        const { RateActions } = this.props;
+        RateActions.initialize();
+    }
 
     getRatingOfItem = async () => {
         const { RateActions, id } = this.props;
@@ -21,6 +27,10 @@ class RatingContainer extends Component {
     getRatedList = async () => {
         const { RateActions, id } = this.props;
         const loggedInfo = storage.get('loggedInfo');
+
+        if(!loggedInfo) {
+            return;
+        }
 
         try {
             await RateActions.getRatedList({email: loggedInfo});
@@ -42,8 +52,13 @@ class RatingContainer extends Component {
     }
 
     handleRate = async ({what}) => {
-        const { RateActions, id } = this.props;
+        const { RateActions, id, history } = this.props;
         const loggedInfo = storage.get('loggedInfo');
+
+        if(!loggedInfo) {
+            history.push("/auth/login");
+            return;
+        }
 
         try {
             await RateActions.rate({postId: id, what, email: loggedInfo });
@@ -55,6 +70,7 @@ class RatingContainer extends Component {
     }
 
     componentDidMount() {
+        this.initialize();
         this.getRatingOfItem();
         this.getRatedList();
     }
@@ -84,4 +100,4 @@ export default connect(
     (dispatch) => ({
         RateActions: bindActionCreators(rateActions, dispatch)
     })
-)(RatingContainer);
+)(withRouter(RatingContainer));

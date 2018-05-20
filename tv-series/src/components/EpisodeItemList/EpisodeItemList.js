@@ -53,7 +53,7 @@ class EpisodeItemList extends Component {
       <div className={cx('EpisodeItemList')}>
         {teaserList}
         {
-          teasers.length !== limit && (
+          teasers.length > limit && (
             <LoadMoreEpisode onClick={this.handleLoadMore} />
           )
         }

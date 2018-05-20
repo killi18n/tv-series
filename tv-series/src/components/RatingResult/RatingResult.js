@@ -8,12 +8,12 @@ class RatingResult extends Component {
 
 
 
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.hit !== this.props.hit) {
-      console.log(prevProps.hit);
-      console.log(this.props.hit);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevProps.hit !== this.props.hit) {
+  //     console.log(prevProps.hit);
+  //     console.log(this.props.hit);
+  //   }
+  // }
 
 
   render() {
