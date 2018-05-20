@@ -14,6 +14,8 @@ const path = require('path');
 
 const api = require('./api');
 
+const buildPath = path.join(__dirname, '../../tv-series/build');
+
 const mongoose = require('mongoose');
 
 const {
@@ -47,6 +49,7 @@ app.use(session(sessionConfig, app));
 app.keys= [signKey];
 
 app.use(router.routes()).use(router.allowedMethods());
+app.use(serve(buildPath));
 
 app.listen(port, () => {
     console.log("app is listening port", port);
