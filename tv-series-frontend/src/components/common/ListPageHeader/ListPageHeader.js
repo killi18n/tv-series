@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const ListPageHeader = ({ onMenuClick }) => (
+const ListPageHeader = ({ showAuthForm }) => (
     <div className={cx('ListPageHeader')}>
         <div className={cx('contents')}>
             <Link to="/" className={cx('logo')}>
@@ -14,18 +14,18 @@ const ListPageHeader = ({ onMenuClick }) => (
             </Link>
             <div className={cx('header-right')}>
                 <div className={cx('top-header-right')}>
-                    <Link
-                        to="/auth/login"
+                    <div
                         className={cx('top-header-right-text')}
+                        onClick={() => showAuthForm({ type: 'login' })}
                     >
                         login
-                    </Link>
-                    <Link
-                        to="/auth/register"
+                    </div>
+                    <div
                         className={cx('top-header-right-text')}
+                        onClick={() => showAuthForm({ type: 'register' })}
                     >
                         sign up
-                    </Link>
+                    </div>
                 </div>
                 <div className={cx('bottom-header-right')}>
                     <Link to="/list/all" className={cx('bottom-header-text')}>

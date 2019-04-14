@@ -10,9 +10,19 @@ class ListHeaderContainer extends Component {
         BaseActions.showSideBar();
     };
 
+    showAuthFormModal = ({ type }) => {
+        const { BaseActions } = this.props;
+        BaseActions.showAuthFormModal({ type });
+    };
+
     render() {
-        const { onMenuClick } = this;
-        return <ListPageHeader onMenuClick={onMenuClick} />;
+        const { onMenuClick, showAuthFormModal } = this;
+        return (
+            <ListPageHeader
+                onMenuClick={onMenuClick}
+                showAuthForm={showAuthFormModal}
+            />
+        );
     }
 }
 export default connect(

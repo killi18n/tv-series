@@ -28,6 +28,8 @@ export const hideAuthFormModal = createAction(
 const initialState = Map({
     sideBarVisible: false,
     postModalVisible: false,
+    registerModalVisible: false,
+    loginModalVisible: false,
 });
 
 // reducer
@@ -45,8 +47,30 @@ export default handleActions(
         [HIDE_POST_MODAL]: (state, action) => {
             return state.set('postModalVisible', false);
         },
-        [SHOW_AUTH_FORM_MODAL]: (state, action) => {},
-        [HIDE_AUTH_FORM_MODAL]: (state, action) => {},
+        [SHOW_AUTH_FORM_MODAL]: (state, action) => {
+            const { type } = action.payload;
+            if (type === 'login') {
+                return state.set('registerModalVisible', true);
+            }
+
+            if (type === 'register') {
+                return state.set('loginModalVisible', true);
+            }
+
+            return state;
+        },
+        [HIDE_AUTH_FORM_MODAL]: (state, action) => {
+            const { type } = action.payload;
+            if (type === 'login') {
+                return state.set('registerModalVisible', false);
+            }
+
+            if (type === 'register') {
+                return state.set('loginModalVisible', false);
+            }
+
+            return state;
+        },
     },
     initialState
 );

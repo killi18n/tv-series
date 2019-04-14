@@ -5,15 +5,9 @@ import * as baseActions from 'store/modules/base';
 import * as authActions from 'store/modules/auth';
 import SideBarWrapper from 'components/common/SideBarWrapper';
 import SideBar from 'components/common/SideBar';
-import onClickOutside from 'react-onclickoutside';
 import storage from 'lib/storage';
 
 class SideBarContainer extends Component {
-    handleClickOutside = () => {
-        const { BaseActions } = this.props;
-        BaseActions.hideSideBar();
-    };
-
     hideSideBar = () => {
         const { BaseActions } = this.props;
         BaseActions.hideSideBar();
@@ -54,4 +48,4 @@ export default connect(
         BaseActions: bindActionCreators(baseActions, dispatch),
         AuthActions: bindActionCreators(authActions, dispatch),
     })
-)(onClickOutside(SideBarContainer));
+)(SideBarContainer);
