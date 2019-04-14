@@ -1,11 +1,11 @@
 import React from 'react';
-import ListPageTemplate from 'components/ListPageTemplate/ListPageTemplate';
-import Introduction from 'components/Introduction/Introduction';
+import ListPageTemplate from 'components/common/ListPageTemplate';
+import Introduction from 'components/common/Introduction';
 
 const IntroductionPage = () => {
     return (
         <ListPageTemplate>
-            <Introduction/>
+            <Introduction />
         </ListPageTemplate>
     );
 };

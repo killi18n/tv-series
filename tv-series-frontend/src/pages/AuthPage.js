@@ -1,6 +1,6 @@
 import React from 'react';
-import ListPageTemplate from 'components/ListPageTemplate/ListPageTemplate';
-import AuthContainer from '../containers/AuthContainer';
+import ListPageTemplate from 'components/common/ListPageTemplate';
+import AuthContainer from 'containers/AuthContainer';
 
 const AuthPage = ({ match }) => {
     const { what } = match.params;

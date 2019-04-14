@@ -1,0 +1,56 @@
+@import 'common';
+
+.ListPageHeader {
+    background: $oc-red-8;
+    .contents {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 5rem;
+
+        .logo {
+            margin-left: 4rem;
+            color: white;
+            font-weight: 800;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            margin-left: auto;
+            color: white;
+            margin-right: 4rem;
+            font-size: 1.15rem;
+
+            .top-header-right {
+                display: flex;
+                flex-direction: row;
+
+                .top-header-right-text {
+                    cursor: pointer;
+                }
+
+                .top-header-right-text + .top-header-right-text {
+                    margin-left: 1rem;
+                }
+            }
+
+            .bottom-header-right {
+                cursor: pointer;
+            }
+        }
+
+        // .menu-wrapper {
+        //     margin-left: auto;
+        //     margin-right: 1rem;
+        //     .menu-button {
+        //         font-size: 2rem;
+        //         color: white;
+        //         cursor: pointer;
+        //     }
+        // }
+    }
+}

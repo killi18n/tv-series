@@ -1,11 +1,11 @@
 import React from 'react';
-import ListPageTemplate from 'components/ListPageTemplate/ListPageTemplate';
+import ListPageTemplate from 'components/common/ListPageTemplate';
 import SeriesListContainer from 'containers/SeriesListContainer';
 
 const SeriesListPage = () => {
     return (
         <ListPageTemplate>
-            <SeriesListContainer/>
+            <SeriesListContainer />
         </ListPageTemplate>
     );
 };

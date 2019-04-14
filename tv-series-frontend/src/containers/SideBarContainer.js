@@ -3,23 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 import * as authActions from 'store/modules/auth';
-import SideBarWrapper from 'components/SideBarWrapper/SideBarWrapper';
-import SideBar from 'components/SideBar/SideBar';
-import onClickOutside from "react-onclickoutside";
+import SideBarWrapper from 'components/common/SideBarWrapper';
+import SideBar from 'components/common/SideBar';
+import onClickOutside from 'react-onclickoutside';
 import storage from 'lib/storage';
 
-
 class SideBarContainer extends Component {
-
     handleClickOutside = () => {
         const { BaseActions } = this.props;
         BaseActions.hideSideBar();
-    }
+    };
 
     hideSideBar = () => {
         const { BaseActions } = this.props;
         BaseActions.hideSideBar();
-    }
+    };
 
     logout = async () => {
         const { AuthActions } = this.props;
@@ -27,31 +25,32 @@ class SideBarContainer extends Component {
         try {
             await AuthActions.logout();
             storage.remove('loggedInfo');
-            window.location.href="/";
-        } catch(e) {
+            window.location.href = '/';
+        } catch (e) {
             console.log(e);
         }
-    }
-    
-
-
+    };
 
     render() {
         const { sideBarVisible, logged } = this.props;
         const { hideSideBar, logout } = this;
         return (
             <SideBarWrapper visible={sideBarVisible}>
-                <SideBar onHide={hideSideBar} logged={logged} onLogout={logout}/>
+                <SideBar
+                    onHide={hideSideBar}
+                    logged={logged}
+                    onLogout={logout}
+                />
             </SideBarWrapper>
-        )
+        );
     }
 }
 export default connect(
-    (state) => ({
+    state => ({
         sideBarVisible: state.base.get('sideBarVisible'),
-        logged: state.auth.get('logged')
+        logged: state.auth.get('logged'),
     }),
-    (dispatch) => ({
+    dispatch => ({
         BaseActions: bindActionCreators(baseActions, dispatch),
         AuthActions: bindActionCreators(authActions, dispatch),
     })

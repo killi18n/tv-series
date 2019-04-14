@@ -4,56 +4,52 @@ import { bindActionCreators } from 'redux';
 import * as editorActions from 'store/modules/editor';
 import * as postActions from 'store/modules/post';
 import * as listActions from 'store/modules/list';
-import Editor from 'components/Editor/Editor';
+import Editor from 'components/admin/Editor';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 
 class EditorContainer extends Component {
-
-
-
     initializeInput = () => {
         const { EditorActions } = this.props;
         EditorActions.initializeInput();
-    }
+    };
 
     initializeSeries = () => {
         const { ListActions } = this.props;
         ListActions.initializeSeries();
-    }
+    };
 
     componentDidMount() {
         const { location, ListActions } = this.props;
         this.initializeInput();
         this.initializeSeries();
         const { id } = queryString.parse(location.search);
-        
-        if(id) {
-            ListActions.getSeriesById({id});
-            
-            
+
+        if (id) {
+            ListActions.getSeriesById({ id });
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { EditorActions } = this.props;
-        
-        if(prevProps.series !== this.props.series && this.props.series.size !== 0) {
-            EditorActions.setServerInputs({serverSeries: this.props.series});
-            const files = this.props.series.actors.map(
-                (actor, i) => {
-                    return {
-                        id: actor.img,
-                        localFileName: null
-                    };
-                }
-            );
+
+        if (
+            prevProps.series !== this.props.series &&
+            this.props.series.size !== 0
+        ) {
+            EditorActions.setServerInputs({ serverSeries: this.props.series });
+            const files = this.props.series.actors.map((actor, i) => {
+                return {
+                    id: actor.img,
+                    localFileName: null,
+                };
+            });
             const thumbnail = {
                 id: this.props.series.thumbnail,
-                localFileName: null
+                localFileName: null,
             };
-            EditorActions.setServerFiles({files});
-            EditorActions.setThumbnailFile({thumbnail});
+            EditorActions.setServerFiles({ files });
+            EditorActions.setThumbnailFile({ thumbnail });
         }
     }
 
@@ -62,10 +58,10 @@ class EditorContainer extends Component {
 
         try {
             await EditorActions.addServerFiles(fd, config);
-        } catch(e) {
+        } catch (e) {
             console.log(e);
         }
-    }
+    };
 
     handleAddServerThumbnail = async (fd, config) => {
         const { EditorActions } = this.props;
@@ -74,37 +70,35 @@ class EditorContainer extends Component {
             await EditorActions.setPrevServerThumbnail();
             await EditorActions.setPrevServerThumbnailList();
             await EditorActions.addServerThumbnail(fd, config);
-        } catch(e) {
+        } catch (e) {
             console.log(e);
         }
-    }
+    };
 
-
-    handleFilterServerFiles = ({removed}) => {
+    handleFilterServerFiles = ({ removed }) => {
         const { EditorActions } = this.props;
-        EditorActions.filterServerFiles({removed});
-    }
+        EditorActions.filterServerFiles({ removed });
+    };
 
-    handleFilterServerThumbnail = ({removed}) => {
+    handleFilterServerThumbnail = ({ removed }) => {
         const { EditorActions } = this.props;
-        EditorActions.filterServerThumbnail({removed});
-    }
+        EditorActions.filterServerThumbnail({ removed });
+    };
 
     handleChangeInput = ({ name, value }) => {
         const { EditorActions } = this.props;
         EditorActions.changeInput({ name, value });
-    }
+    };
 
     uploadImage = async (fd, config) => {
         const { EditorActions } = this.props;
 
         try {
-
             await EditorActions.uploadImage(fd, config);
         } catch (e) {
             console.log(e);
         }
-    }
+    };
 
     thumbnailUpload = async (fd, config) => {
         const { EditorActions, prevThumbnail } = this.props;
@@ -113,13 +107,14 @@ class EditorContainer extends Component {
             await EditorActions.setPrevThumbnail();
             await EditorActions.uploadImageThumbnail(fd, config);
             if (this.props.prevThumbnail.size !== 0) {
-                await EditorActions.filterImageApi({ image: this.props.prevThumbnail.id });
+                await EditorActions.filterImageApi({
+                    image: this.props.prevThumbnail.id,
+                });
             }
-
         } catch (e) {
             console.log(e);
         }
-    }
+    };
 
     filterImage = async ({ image }) => {
         const { EditorActions } = this.props;
@@ -131,8 +126,7 @@ class EditorContainer extends Component {
         } catch (e) {
             console.log(e);
         }
-
-    }
+    };
 
     filterThumbnail = async ({ image }) => {
         const { EditorActions } = this.props;
@@ -144,11 +138,24 @@ class EditorContainer extends Component {
         } catch (e) {
             console.log(e);
         }
-    }
+    };
 
     handlePost = async () => {
-        const { EditorActions, storedFiles, thumbnailFiles, history, location, PostActions, serverThumbnail, prevServerThumbnailList, willRemoveServerFiles, willRemoveThumbnailFile, serverFiles } = this.props;
-        const { name,
+        const {
+            EditorActions,
+            storedFiles,
+            thumbnailFiles,
+            history,
+            location,
+            PostActions,
+            serverThumbnail,
+            prevServerThumbnailList,
+            willRemoveServerFiles,
+            willRemoveThumbnailFile,
+            serverFiles,
+        } = this.props;
+        const {
+            name,
             teasername,
             videoId,
             actorname,
@@ -156,70 +163,101 @@ class EditorContainer extends Component {
             genre,
             startYear,
             endYear,
-            firstBroadcasted } = this.props.inputs.toJS();
+            firstBroadcasted,
+        } = this.props.inputs.toJS();
 
         const { id } = queryString.parse(location.search);
         try {
-
-            
             let teasers = [];
-            let teasernameArr = [...new Set(teasername.split(",").map(name => name.trim()))];
-            let videoIdArr = [...new Set(videoId.split(",").map(video => video.trim()))];
-            teasers = teasernameArr.map(
-                (name, i) => {
-                    return {
-                        "name": name,
-                        "videoId": videoIdArr[i]
-                    }
-                }
-            );
+            let teasernameArr = [
+                ...new Set(teasername.split(',').map(name => name.trim())),
+            ];
+            let videoIdArr = [
+                ...new Set(videoId.split(',').map(video => video.trim())),
+            ];
+            teasers = teasernameArr.map((name, i) => {
+                return {
+                    name: name,
+                    videoId: videoIdArr[i],
+                };
+            });
             let actors = [];
-            let actornameArr = [...new Set(actorname.split(",").map(name => name.trim()))];
+            let actornameArr = [
+                ...new Set(actorname.split(',').map(name => name.trim())),
+            ];
             let imgArr = null;
-            if(id) {
-                imgArr = serverFiles.map(
-                    (file, i) => {
-                        return file.id;
-                    }
-                );
+            if (id) {
+                imgArr = serverFiles.map((file, i) => {
+                    return file.id;
+                });
+            } else {
+                imgArr = storedFiles.toJS().map((file, i) => {
+                    return file.id;
+                });
             }
-            else {
-               imgArr = storedFiles.toJS().map(
-                    (file, i) => {
-                        return file.id;
-                    }
-                );
-            } 
-            actors = actornameArr.map(
-                (name, i) => {
-                    return {
-                        "name": name,
-                        "img": imgArr[i]
-                    }
-                }
-            );
-            let genreArr = [...new Set(genre.split(",").map(gen => gen.trim()))];
+            actors = actornameArr.map((name, i) => {
+                return {
+                    name: name,
+                    img: imgArr[i],
+                };
+            });
+            let genreArr = [
+                ...new Set(genre.split(',').map(gen => gen.trim())),
+            ];
 
-            if(id) {
+            if (id) {
                 // console.log(serverThumbnail.id);
                 // return;
-                await PostActions.editPost({id, name, teasers, actors, story, thumbnail: serverThumbnail.id, genre: genreArr, startYear, endYear});
-                await PostActions.trash({prevServerThumbnailList, willRemoveServerFiles, willRemoveThumbnailFile});
+                await PostActions.editPost({
+                    id,
+                    name,
+                    teasers,
+                    actors,
+                    story,
+                    thumbnail: serverThumbnail.id,
+                    genre: genreArr,
+                    startYear,
+                    endYear,
+                });
+                await PostActions.trash({
+                    prevServerThumbnailList,
+                    willRemoveServerFiles,
+                    willRemoveThumbnailFile,
+                });
                 // window.location.reload();
                 history.push(`/series/${id}`);
                 return;
             }
 
-            await EditorActions.post({name, teasers, actors, story, thumbnail: thumbnailFiles.id, genre: genreArr, startYear, endYear, firstBroadcasted});
+            await EditorActions.post({
+                name,
+                teasers,
+                actors,
+                story,
+                thumbnail: thumbnailFiles.id,
+                genre: genreArr,
+                startYear,
+                endYear,
+                firstBroadcasted,
+            });
             history.push(`/series/${this.props.postedPost._id}`);
         } catch (e) {
             console.log(e);
         }
-    }
+    };
 
     render() {
-        const { handleChangeInput, uploadImage, filterImage, thumbnailUpload, filterThumbnail, handlePost, handleFilterServerFiles } = this;
-        const { name,
+        const {
+            handleChangeInput,
+            uploadImage,
+            filterImage,
+            thumbnailUpload,
+            filterThumbnail,
+            handlePost,
+            handleFilterServerFiles,
+        } = this;
+        const {
+            name,
             teasername,
             videoId,
             actorname,
@@ -227,9 +265,14 @@ class EditorContainer extends Component {
             genre,
             startYear,
             endYear,
-            firstBroadcasted } = this.props.inputs.toJS();
+            firstBroadcasted,
+        } = this.props.inputs.toJS();
         const { storedFiles, thumbnailFiles, series, serverFiles } = this.props;
-        const { handleAddServerFile, handleFilterServerThumbnail, handleAddServerThumbnail } = this;
+        const {
+            handleAddServerFile,
+            handleFilterServerThumbnail,
+            handleAddServerThumbnail,
+        } = this;
         const { serverThumbnail } = this.props;
 
         return (
@@ -259,11 +302,11 @@ class EditorContainer extends Component {
                 onFilterServerThumbnail={handleFilterServerThumbnail}
                 onAddServerThumbnail={handleAddServerThumbnail}
             />
-        )
+        );
     }
 }
 export default connect(
-    (state) => ({
+    state => ({
         inputs: state.editor.get('inputs'),
         storedFiles: state.editor.get('storedFiles'),
         thumbnailFiles: state.editor.get('thumbnailFiles'),
@@ -274,12 +317,11 @@ export default connect(
         serverThumbnail: state.editor.get('serverThumbnail'),
         prevServerThumbnailList: state.editor.get('prevServerThumbnailList'),
         willRemoveServerFiles: state.editor.get('willRemoveServerFiles'),
-        willRemoveThumbnailFile: state.editor.get('willRemoveThumbnailFile')
-
+        willRemoveThumbnailFile: state.editor.get('willRemoveThumbnailFile'),
     }),
-    (dispatch) => ({
+    dispatch => ({
         EditorActions: bindActionCreators(editorActions, dispatch),
         ListActions: bindActionCreators(listActions, dispatch),
-        PostActions: bindActionCreators(postActions, dispatch)
+        PostActions: bindActionCreators(postActions, dispatch),
     })
 )(withRouter(EditorContainer));
