@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import {
     SeriesListPage,
     SeriesPage,
-    AuthPage,
     IntroductionPage,
     CategoryListPage,
     EditorPage,
@@ -23,7 +22,7 @@ class App extends Component {
                         component={CategoryListPage}
                     />
                     <Route path="/series/:id" component={SeriesPage} />
-                    <Route path="/auth/:what" component={AuthPage} />
+                    {/* <Route path="/auth/:what" component={AuthPage} /> */}
                 </Switch>
                 <Base />
             </div>
