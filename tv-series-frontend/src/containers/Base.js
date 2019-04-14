@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from 'store/modules/auth';
 import storage from 'lib/storage';
+import AuthFormModalContainer from './AuthFormModalContainer';
 
 class Base extends Component {
     check = async () => {
@@ -25,7 +26,7 @@ class Base extends Component {
     }
 
     render() {
-        return <div />;
+        return <AuthFormModalContainer />;
     }
 }
 export default connect(

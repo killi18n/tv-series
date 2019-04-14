@@ -25,10 +25,10 @@ const AuthForm = ({
         <div className={cx('AuthForm')}>
             {what === 'login' && (
                 <div className={cx('contents')}>
-                    <div className={cx('title')}>로그인</div>
+                    <div className={cx('title')}>Login</div>
                     {error && <div className={cx('error')}>{error}</div>}
                     <div className={cx('OneOfLine')}>
-                        <div className={cx('label')}>이메일</div>
+                        <div className={cx('label')}>email</div>
                         <div className={cx('input-wrapper')}>
                             <input
                                 type="email"
@@ -40,7 +40,7 @@ const AuthForm = ({
                         </div>
                     </div>
                     <div className={cx('OneOfLine')}>
-                        <div className={cx('label')}>비밀번호</div>
+                        <div className={cx('label')}>password</div>
                         <div className={cx('input-wrapper')}>
                             <input
                                 type="password"
@@ -53,27 +53,26 @@ const AuthForm = ({
                     </div>
                     <div className={cx('button-wrapper')}>
                         <div className={cx('button')} onClick={onLogin}>
-                            로그인
+                            Login
                         </div>
                     </div>
                     <div className={cx('desc')}>
-                        아직 회원이 아니시라면?{' '}
                         <Link className={cx('text')} to="/auth/register">
-                            회원가입하기
+                            Sign Up
                         </Link>
                     </div>
                 </div>
             )}
             {what === 'register' && (
                 <div className={cx('contents')}>
-                    <div className={cx('title')}>회원가입</div>
+                    <div className={cx('title')}>Sign up</div>
                     <div className={cx('OneOfLine')}>
-                        <div className={cx('label')}>이메일</div>
+                        <div className={cx('label')}>email</div>
                         <div className={cx('input-wrapper')}>
                             <input
                                 type="email"
                                 name="email"
-                                placeholder="이메일 플리즈.."
+                                placeholder="valid email"
                                 value={email}
                                 onChange={handleChangeInput}
                                 onKeyDown={onKeydownRegister}
@@ -81,12 +80,12 @@ const AuthForm = ({
                         </div>
                     </div>
                     <div className={cx('OneOfLine')}>
-                        <div className={cx('label')}>비밀번호</div>
+                        <div className={cx('label')}>password</div>
                         <div className={cx('input-wrapper')}>
                             <input
                                 type="password"
                                 name="password"
-                                placeholder="6자 이상 아무거나!"
+                                placeholder="any characters but more than 6"
                                 value={password}
                                 onChange={handleChangeInput}
                                 onKeyDown={onKeydownRegister}
@@ -94,12 +93,12 @@ const AuthForm = ({
                         </div>
                     </div>
                     <div className={cx('OneOfLine')}>
-                        <div className={cx('label')}>비밀번호 한번 더</div>
+                        <div className={cx('label')}>password check</div>
                         <div className={cx('input-wrapper')}>
                             <input
                                 type="password"
                                 name="passwordCheck"
-                                placeholder="6자 이상 아무거나!"
+                                placeholder="same password"
                                 value={passwordCheck}
                                 onChange={handleChangeInput}
                                 onKeyDown={onKeydownRegister}
@@ -108,7 +107,7 @@ const AuthForm = ({
                     </div>
                     <div className={cx('button-wrapper')}>
                         <div className={cx('button')} onClick={onRegister}>
-                            회원가입
+                            Sign up
                         </div>
                     </div>
                 </div>

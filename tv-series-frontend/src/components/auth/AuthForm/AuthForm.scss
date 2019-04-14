@@ -12,12 +12,14 @@
     // margin: 0 auto;
     display: flex;
     justify-content: center;
+
     .contents {
         @include material-shadow(4, 0.5);
         background: white;
         padding: 1rem;
         margin-top: 1rem;
         width: 500px;
+        border-radius: 2px;
         .title {
             font-size: 1.5rem;
             font-weight: 500;
@@ -61,7 +63,7 @@
             display: flex;
             justify-content: center;
             .button {
-                background: #ffd43b;
+                background: $oc-red-7;
                 color: white;
                 width: 100%;
                 padding-top: 0.5rem;
@@ -71,11 +73,11 @@
                 cursor: pointer;
 
                 &:hover {
-                    background: #fcc419;
+                    background: $oc-red-6;
                 }
 
                 &:active {
-                    background: #fab005;
+                    background: $oc-red-7;
                 }
             }
         }
