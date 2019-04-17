@@ -1,8 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 import * as api from 'lib/api';
-import { pender } from 'redux-pender';
 
 // action types
 const REMOVE_POST = 'post/REMOVE_POST';
@@ -15,11 +14,7 @@ export const editPost = createAction(EDIT_POST, api.editPost);
 export const trash = createAction(TRASH, api.trash);
 
 // initial state
-const initialState = Map({
-    
-});
+const initialState = Map({});
 
 // reducer
-export default handleActions({
-
-}, initialState);
+export default handleActions({}, initialState);

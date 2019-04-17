@@ -6,32 +6,32 @@ import storage from 'lib/storage';
 import AuthFormModalContainer from './AuthFormModalContainer';
 
 class Base extends Component {
-    check = async () => {
-        const loggedInfo = storage.get('loggedInfo');
-        if (!loggedInfo) return;
+  componentDidMount() {
+    this.check();
+  }
 
-        const { AuthActions } = this.props;
-        AuthActions.setLoggedInfo({ loggedInfo });
+  check = async () => {
+    const loggedInfo = storage.get('loggedInfo');
+    if (!loggedInfo) return;
 
-        try {
-            await AuthActions.check();
-        } catch (e) {
-            localStorage.remove('loggedInfo');
-            window.location.href = '/auth/login?expired';
-        }
-    };
+    const { AuthActions } = this.props;
+    AuthActions.setLoggedInfo({ loggedInfo });
 
-    componentDidMount() {
-        this.check();
+    try {
+      await AuthActions.check();
+    } catch (e) {
+      localStorage.remove('loggedInfo');
+      window.location.href = '/auth/login?expired';
     }
+  };
 
-    render() {
-        return <AuthFormModalContainer />;
-    }
+  render() {
+    return <AuthFormModalContainer />;
+  }
 }
 export default connect(
-    state => ({}),
-    dispatch => ({
-        AuthActions: bindActionCreators(authActions, dispatch),
-    })
+  () => ({}),
+  dispatch => ({
+    AuthActions: bindActionCreators(authActions, dispatch),
+  })
 )(Base);

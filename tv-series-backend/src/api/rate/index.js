@@ -10,5 +10,4 @@ rates.get('/rating/:id', rateCtrl.getRating);
 // // posts.delete('/:id', postCtrl.checkLogin, postCtrl.checkObjectId, postCtrl.remove);
 // // posts.patch('/:id', postCtrl.checkLogin, postCtrl.checkObjectId, postCtrl.update);
 
-
 module.exports = rates;

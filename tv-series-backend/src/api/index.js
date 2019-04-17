@@ -12,6 +12,4 @@ api.use('/auth', auth.routes());
 api.use('/rate', rate.routes());
 api.use('/editor', editor.routes());
 
-
-
 module.exports = api;

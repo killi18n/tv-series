@@ -1,10 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const uploadDirPath = "../../../uploads";
-const { decodeToken } = require("lib/token");
+const fs = require('fs');
+const path = require('path');
+
+const uploadDirPath = '../../../uploads';
+const { decodeToken } = require('lib/token');
 
 exports.checkAdmin = async (ctx, next) => {
-  const token = ctx.cookies.get("access_token");
+  const token = ctx.cookies.get('access_token');
 
   const decoded = await decodeToken(token);
   console.log(decoded);
@@ -27,22 +28,21 @@ exports.uploadImage = async ctx => {
   const storageFileName = Math.random().toString();
   const reader = fs.createReadStream(file.path);
   const stream = fs.createWriteStream(
-    path.join(__dirname + uploadDirPath, storageFileName + ".jpg")
+    path.join(__dirname, `${uploadDirPath}/${storageFileName}.jpg`)
   );
   reader.pipe(stream);
   ctx.body = {
-    storedFileName: storageFileName + ".jpg",
-    localFileName: file.name
+    storedFileName: `${storageFileName}.jpg`,
+    localFileName: file.name,
   };
 };
 
 exports.deleteImage = async ctx => {
   const { image } = ctx.request.body;
-  if (!fs.existsSync(path.join(__dirname + uploadDirPath, image))) {
+  if (!fs.existsSync(path.join(__dirname, `${uploadDirPath}/${image}`))) {
     ctx.status = 204;
     return;
   }
-  fs.unlinkSync(path.join(__dirname + uploadDirPath, image));
+  fs.unlinkSync(path.join(__dirname, `${uploadDirPath}/${image}`));
   ctx.status = 204;
-  return;
 };

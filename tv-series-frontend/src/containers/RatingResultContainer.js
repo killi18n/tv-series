@@ -5,33 +5,33 @@ import * as rateActions from 'store/modules/rate';
 import RatingResult from 'components/contents/RatingResult';
 
 class RatingResultContainer extends Component {
-    getRating = async () => {
-        const { RateActions, id } = this.props;
+  componentDidMount() {
+    this.getRating();
+  }
 
-        try {
-            await RateActions.getRatingOfItem({ id });
-            // console.log(this.props.hit);
-        } catch (e) {
-            console.log(e);
-        }
-    };
+  getRating = async () => {
+    const { RateActions, id } = this.props;
 
-    componentDidMount() {
-        this.getRating();
+    try {
+      await RateActions.getRatingOfItem({ id });
+      // console.log(this.props.hit);
+    } catch (e) {
+      console.log(e);
     }
+  };
 
-    render() {
-        const { hit, good, bad, loading } = this.props;
-        return <RatingResult hit={hit} good={good} bad={bad} />;
-    }
+  render() {
+    const { hit, good, bad } = this.props;
+    return <RatingResult hit={hit} good={good} bad={bad} />;
+  }
 }
 export default connect(
-    state => ({
-        hit: state.rate.get('hit'),
-        good: state.rate.get('good'),
-        bad: state.rate.get('bad'),
-    }),
-    dispatch => ({
-        RateActions: bindActionCreators(rateActions, dispatch),
-    })
+  state => ({
+    hit: state.rate.get('hit'),
+    good: state.rate.get('good'),
+    bad: state.rate.get('bad'),
+  }),
+  dispatch => ({
+    RateActions: bindActionCreators(rateActions, dispatch),
+  })
 )(RatingResultContainer);

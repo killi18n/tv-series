@@ -8,44 +8,40 @@ import SideBar from 'components/common/SideBar';
 import storage from 'lib/storage';
 
 class SideBarContainer extends Component {
-    hideSideBar = () => {
-        const { BaseActions } = this.props;
-        BaseActions.hideSideBar();
-    };
+  hideSideBar = () => {
+    const { BaseActions } = this.props;
+    BaseActions.hideSideBar();
+  };
 
-    logout = async () => {
-        const { AuthActions } = this.props;
+  logout = async () => {
+    const { AuthActions } = this.props;
 
-        try {
-            await AuthActions.logout();
-            storage.remove('loggedInfo');
-            window.location.href = '/';
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    render() {
-        const { sideBarVisible, logged } = this.props;
-        const { hideSideBar, logout } = this;
-        return (
-            <SideBarWrapper visible={sideBarVisible}>
-                <SideBar
-                    onHide={hideSideBar}
-                    logged={logged}
-                    onLogout={logout}
-                />
-            </SideBarWrapper>
-        );
+    try {
+      await AuthActions.logout();
+      storage.remove('loggedInfo');
+      window.location.href = '/';
+    } catch (e) {
+      console.log(e);
     }
+  };
+
+  render() {
+    const { sideBarVisible, logged } = this.props;
+    const { hideSideBar, logout } = this;
+    return (
+      <SideBarWrapper visible={sideBarVisible}>
+        <SideBar onHide={hideSideBar} logged={logged} onLogout={logout} />
+      </SideBarWrapper>
+    );
+  }
 }
 export default connect(
-    state => ({
-        sideBarVisible: state.base.get('sideBarVisible'),
-        logged: state.auth.get('logged'),
-    }),
-    dispatch => ({
-        BaseActions: bindActionCreators(baseActions, dispatch),
-        AuthActions: bindActionCreators(authActions, dispatch),
-    })
+  state => ({
+    sideBarVisible: state.base.get('sideBarVisible'),
+    logged: state.auth.get('logged'),
+  }),
+  dispatch => ({
+    BaseActions: bindActionCreators(baseActions, dispatch),
+    AuthActions: bindActionCreators(authActions, dispatch),
+  })
 )(SideBarContainer);

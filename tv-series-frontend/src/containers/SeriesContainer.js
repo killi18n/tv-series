@@ -11,76 +11,76 @@ import SeriesHeader from 'components/contents/SeriesHeader';
 import SideBarContainer from 'containers/SideBarContainer';
 
 class SeriesContainer extends Component {
-    showSideBar = () => {
-        const { BaseActions } = this.props;
-        BaseActions.showSideBar();
-    };
+  componentDidMount() {
+    this.getSeries();
+  }
 
-    showPostModal = () => {
-        const { BaseActions } = this.props;
-        BaseActions.showPostModal();
-    };
+  showSideBar = () => {
+    const { BaseActions } = this.props;
+    BaseActions.showSideBar();
+  };
 
-    getSeries = async () => {
-        const { ListActions, id } = this.props;
+  showPostModal = () => {
+    const { BaseActions } = this.props;
+    BaseActions.showPostModal();
+  };
 
-        try {
-            await ListActions.getSeriesById({ id });
-        } catch (e) {
-            console.log(e);
-        }
-    };
+  getSeries = async () => {
+    const { ListActions, id } = this.props;
 
-    initializeSeries = () => {
-        const { ListActions } = this.props;
-        ListActions.initializeSeries();
-    };
-
-    componentDidMount() {
-        this.getSeries();
+    try {
+      await ListActions.getSeriesById({ id });
+    } catch (e) {
+      console.log(e);
     }
+  };
 
-    // componentWillUnmount() {
-    //     this.initializeSeries();
-    // }
+  initializeSeries = () => {
+    const { ListActions } = this.props;
+    ListActions.initializeSeries();
+  };
 
-    render() {
-        const { showSideBar, showPostModal } = this;
-        const { id, series, admin } = this.props;
+  // componentWillUnmount() {
+  //     this.initializeSeries();
+  // }
 
-        if (series === undefined) return null;
-        return (
-            <SeriesTemplate>
-                <SeriesHeader
-                    thumbnail={series.thumbnail}
-                    name={series.name}
-                    genres={series.genre}
-                    startYear={series.startYear}
-                    endYear={series.endYear}
-                    onClickMenu={showSideBar}
-                    onClickPlayNow={this.handleClickPlayNow}
-                    admin={admin}
-                    showPostModal={showPostModal}
-                />
-                <SeriesMain
-                    id={id}
-                    story={series.story}
-                    teasers={series.teasers}
-                    actors={series.actors}
-                />
-                <SideBarContainer />
-            </SeriesTemplate>
-        );
-    }
+  render() {
+    const { showSideBar, showPostModal } = this;
+    const { id, series, admin } = this.props;
+
+    if (series === undefined) return null;
+    return (
+      <SeriesTemplate>
+        <SeriesHeader
+          thumbnail={series.thumbnail}
+          name={series.name}
+          genres={series.genre}
+          startYear={series.startYear}
+          endYear={series.endYear}
+          onClickMenu={showSideBar}
+          onClickPlayNow={this.handleClickPlayNow}
+          admin={admin}
+          showPostModal={showPostModal}
+        />
+        <SeriesMain
+          id={id}
+          story={series.story}
+          teasers={series.teasers}
+          actors={series.actors}
+        />
+        <SideBarContainer />
+      </SeriesTemplate>
+    );
+  }
 }
 export default connect(
-    state => ({
-        series: state.list.get('series'),
-        admin: state.auth.get('admin'),
-    }),
-    dispatch => ({
-        // SeriesActions: bindActionCreators(seriesActions, dispatch),
-        BaseActions: bindActionCreators(baseActions, dispatch),
-        ListActions: bindActionCreators(listActions, dispatch),
-    })
+  state => ({
+    series: state.list.get('series'),
+    admin: state.auth.get('admin'),
+  }),
+  dispatch => ({
+    // SeriesActions: bindActionCreators(seriesActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch),
+    ListActions: bindActionCreators(listActions, dispatch),
+  })
 )(SeriesContainer);

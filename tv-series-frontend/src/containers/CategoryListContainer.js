@@ -6,49 +6,48 @@ import data from 'data.json';
 import * as listActions from 'store/modules/list';
 
 class CategoryListContainer extends Component {
-    getAll = async () => {
-        const { ListActions, page, category } = this.props;
+  componentDidMount() {
+    this.getAll();
+  }
 
-        try {
-            await ListActions.getAll({ page, genre: category });
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    componentDidMount() {
-        this.getAll();
+  componentDidUpdate(prevProps) {
+    const { page, category } = this.props;
+    const { prevPage, prevCategory } = prevProps;
+    if (prevPage !== page || prevCategory !== category) {
+      this.getAll();
+      document.documentElement.scrollTop = 0;
     }
+  }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (
-            prevProps.page !== this.props.page ||
-            prevProps.category !== this.props.category
-        ) {
-            this.getAll();
-            document.documentElement.scrollTop = 0;
-        }
-    }
+  getAll = async () => {
+    const { ListActions, page, category } = this.props;
 
-    render() {
-        const { category, all, lastPage, page } = this.props;
-        return (
-            <CategoryList
-                categories={data.categories}
-                category={category}
-                all={all}
-                lastPage={lastPage}
-                page={page}
-            />
-        );
+    try {
+      await ListActions.getAll({ page, genre: category });
+    } catch (e) {
+      console.log(e);
     }
+  };
+
+  render() {
+    const { category, all, lastPage, page } = this.props;
+    return (
+      <CategoryList
+        categories={data.categories}
+        category={category}
+        all={all}
+        lastPage={lastPage}
+        page={page}
+      />
+    );
+  }
 }
 export default connect(
-    state => ({
-        all: state.list.get('all'),
-        lastPage: state.list.get('lastPage'),
-    }),
-    dispatch => ({
-        ListActions: bindActionCreators(listActions, dispatch),
-    })
+  state => ({
+    all: state.list.get('all'),
+    lastPage: state.list.get('lastPage'),
+  }),
+  dispatch => ({
+    ListActions: bindActionCreators(listActions, dispatch),
+  })
 )(CategoryListContainer);

@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 
 // action types
 const SHOW_SIDE_BAR = 'base/SHOW_SIDE_BAR';
@@ -16,61 +16,61 @@ export const hideSideBar = createAction(HIDE_SIDE_BAR);
 export const showPostModal = createAction(SHOW_POST_MODAL);
 export const hidePostModal = createAction(HIDE_POST_MODAL);
 export const showAuthFormModal = createAction(
-    SHOW_AUTH_FORM_MODAL,
-    ({ type }) => ({ type })
+  SHOW_AUTH_FORM_MODAL,
+  ({ type }) => ({ type })
 );
 export const hideAuthFormModal = createAction(
-    HIDE_AUTH_FORM_MODAL,
-    ({ type }) => ({ type })
+  HIDE_AUTH_FORM_MODAL,
+  ({ type }) => ({ type })
 );
 
 // initial state
 const initialState = Map({
-    sideBarVisible: false,
-    postModalVisible: false,
-    registerModalVisible: false,
-    loginModalVisible: false,
+  sideBarVisible: false,
+  postModalVisible: false,
+  registerModalVisible: false,
+  loginModalVisible: false,
 });
 
 // reducer
 export default handleActions(
-    {
-        [SHOW_SIDE_BAR]: (state, action) => {
-            return state.set('sideBarVisible', true);
-        },
-        [HIDE_SIDE_BAR]: (state, action) => {
-            return state.set('sideBarVisible', false);
-        },
-        [SHOW_POST_MODAL]: (state, action) => {
-            return state.set('postModalVisible', true);
-        },
-        [HIDE_POST_MODAL]: (state, action) => {
-            return state.set('postModalVisible', false);
-        },
-        [SHOW_AUTH_FORM_MODAL]: (state, action) => {
-            const { type } = action.payload;
-            if (type === 'login') {
-                return state.set('loginModalVisible', true);
-            }
-
-            if (type === 'register') {
-                return state.set('registerModalVisible', true);
-            }
-
-            return state;
-        },
-        [HIDE_AUTH_FORM_MODAL]: (state, action) => {
-            const { type } = action.payload;
-            if (type === 'login') {
-                return state.set('registerModalVisible', false);
-            }
-
-            if (type === 'register') {
-                return state.set('loginModalVisible', false);
-            }
-
-            return state;
-        },
+  {
+    [SHOW_SIDE_BAR]: state => {
+      return state.set('sideBarVisible', true);
     },
-    initialState
+    [HIDE_SIDE_BAR]: state => {
+      return state.set('sideBarVisible', false);
+    },
+    [SHOW_POST_MODAL]: state => {
+      return state.set('postModalVisible', true);
+    },
+    [HIDE_POST_MODAL]: state => {
+      return state.set('postModalVisible', false);
+    },
+    [SHOW_AUTH_FORM_MODAL]: (state, action) => {
+      const { type } = action.payload;
+      if (type === 'login') {
+        return state.set('loginModalVisible', true);
+      }
+
+      if (type === 'register') {
+        return state.set('registerModalVisible', true);
+      }
+
+      return state;
+    },
+    [HIDE_AUTH_FORM_MODAL]: (state, action) => {
+      const { type } = action.payload;
+      if (type === 'login') {
+        return state.set('registerModalVisible', false);
+      }
+
+      if (type === 'register') {
+        return state.set('loginModalVisible', false);
+      }
+
+      return state;
+    },
+  },
+  initialState
 );

@@ -1,10 +1,9 @@
 import { createAction, handleActions } from 'redux-actions';
 
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 import * as api from 'lib/api';
-import { pender } from 'redux-pender'; 
+import { pender } from 'redux-pender';
 import storage from 'lib/storage';
-
 
 // action types
 const LOGIN = 'auth/LOGIN';
@@ -26,49 +25,51 @@ export const logout = createAction(LOGOUT, api.logout);
 
 // initial state
 const initialState = Map({
-    email: '',
-    password: '',
-    passwordCheck: '',
-    logged: false,
-    error: '',
-    loggedInfo: '',
-    admin: false
+  email: '',
+  password: '',
+  passwordCheck: '',
+  logged: false,
+  error: '',
+  loggedInfo: '',
+  admin: false,
 });
 
 // reducer
-export default handleActions({
+export default handleActions(
+  {
     [CHANGE_INPUT]: (state, action) => {
-        const { name, value } = action.payload;
-        return state.set(name, value);
+      const { name, value } = action.payload;
+      return state.set(name, value);
     },
     ...pender({
-        type: LOGIN, 
-        onSuccess: (state, action) => {
-            const { email, admin } = action.payload.data;
-            storage.set('loggedInfo', email);
-            return state.set('logged', true)
-                        .set('admin', admin);
-        },
-        onError: (state, action) => {
-            return state.set('error', '잘못된 로그인 입니다.');
-        }   
+      type: LOGIN,
+      onSuccess: (state, action) => {
+        const { email, admin } = action.payload.data;
+        storage.set('loggedInfo', email);
+        return state.set('logged', true).set('admin', admin);
+      },
+      onError: state => {
+        return state.set('error', '잘못된 로그인 입니다.');
+      },
     }),
-    [INITIALIZE_INPUTS]: (state, action) => {
-        return state.set('email', '')
-                    .set('password', '')
-                    .set('passwordCheck', '')
-                    .set('error', '');
+    [INITIALIZE_INPUTS]: state => {
+      return state
+        .set('email', '')
+        .set('password', '')
+        .set('passwordCheck', '')
+        .set('error', '');
     },
     [SET_LOGGED_INFO]: (state, action) => {
-        const { loggedInfo } = action.payload;
-        return state.set('loggedInfo', loggedInfo)
-                    .set('logged', true);
+      const { loggedInfo } = action.payload;
+      return state.set('loggedInfo', loggedInfo).set('logged', true);
     },
     ...pender({
-        type: CHECK,
-        onSuccess: (state, action) => {
-            const { data: user } = action.payload;
-            return state.set('admin', user.admin);
-        }
-    })
-}, initialState);
+      type: CHECK,
+      onSuccess: (state, action) => {
+        const { data: user } = action.payload;
+        return state.set('admin', user.admin);
+      },
+    }),
+  },
+  initialState
+);

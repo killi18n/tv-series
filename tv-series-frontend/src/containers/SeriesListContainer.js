@@ -6,34 +6,33 @@ import data from 'data.json';
 import * as listActions from 'store/modules/list';
 
 class SeriesListContainer extends Component {
-    getLists = async () => {
-        const { ListActions } = this.props;
+  componentDidMount() {
+    this.getLists();
+  }
 
-        try {
-            await ListActions.getTop4Rated();
-            await ListActions.getBrand4();
-        } catch (e) {
-            console.log(e);
-        }
-    };
+  getLists = async () => {
+    const { ListActions } = this.props;
 
-    componentDidMount() {
-        this.getLists();
+    try {
+      await ListActions.getTop4Rated();
+      await ListActions.getBrand4();
+    } catch (e) {
+      console.log(e);
     }
-    render() {
-        const { series } = data;
-        const { top4Rated, brand4 } = this.props;
-        return (
-            <SeriesList series={series} top4Rated={top4Rated} brand4={brand4} />
-        );
-    }
+  };
+
+  render() {
+    const { series } = data;
+    const { top4Rated, brand4 } = this.props;
+    return <SeriesList series={series} top4Rated={top4Rated} brand4={brand4} />;
+  }
 }
 export default connect(
-    state => ({
-        top4Rated: state.list.get('top4'),
-        brand4: state.list.get('brand4'),
-    }),
-    dispatch => ({
-        ListActions: bindActionCreators(listActions, dispatch),
-    })
+  state => ({
+    top4Rated: state.list.get('top4'),
+    brand4: state.list.get('brand4'),
+  }),
+  dispatch => ({
+    ListActions: bindActionCreators(listActions, dispatch),
+  })
 )(SeriesListContainer);

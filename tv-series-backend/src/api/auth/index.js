@@ -8,5 +8,4 @@ auths.get('/check', authCtrl.check);
 auths.post('/logout', authCtrl.logout);
 auths.post('/register', authCtrl.register);
 
-
-module.exports = auths; 
+module.exports = auths;

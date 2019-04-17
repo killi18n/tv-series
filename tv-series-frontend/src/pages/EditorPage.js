@@ -2,9 +2,7 @@ import React from 'react';
 import EditorContainer from 'containers/EditorContainer';
 
 const EditorPage = () => {
-    return (
-        <EditorContainer/>
-    );
+  return <EditorContainer />;
 };
 
 export default EditorPage;
