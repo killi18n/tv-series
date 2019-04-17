@@ -63,12 +63,11 @@ exports.create = async ctx => {
       firstBroadcasted,
     });
 
-    post.save();
+    await post.save();
+    ctx.body = post;
   } catch (e) {
     ctx.throw(500, e);
   }
-
-  ctx.body = post;
 };
 
 exports.list = async ctx => {

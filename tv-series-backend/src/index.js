@@ -8,7 +8,7 @@ const koaBody = require('koa-body');
 const mount = require('koa-mount');
 const serve = require('koa-static');
 
-const uploadDirPath = './uploads';
+const uploadDirPath = '../uploads';
 const { jwtMiddleware } = require('lib/token');
 const path = require('path');
 const mongoose = require('mongoose');
