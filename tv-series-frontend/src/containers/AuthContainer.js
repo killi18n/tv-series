@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import onClickOutside from 'react-onclickoutside';
 import * as authActions from 'store/modules/auth';
+import * as baseActions from 'store/modules/base';
 import AuthForm from 'components/auth/AuthForm';
-import { withRouter } from 'react-router-dom';
 
 class AuthContainer extends Component {
   componentDidMount() {
@@ -12,11 +14,17 @@ class AuthContainer extends Component {
 
   componentDidUpdate(prevProps) {
     const { what } = this.props;
-    const { prevWhat } = prevProps;
+    const { what: prevWhat } = prevProps;
     if (prevWhat !== what) {
       this.intializeInputs();
     }
   }
+
+  handleClickOutside = () => {
+    const { BaseActions, what } = this.props;
+    console.log(what);
+    BaseActions.hideAuthFormModal({ type: what });
+  };
 
   handleRegister = async () => {
     const { AuthActions, email, password, passwordCheck, history } = this.props;
@@ -97,5 +105,6 @@ export default connect(
   }),
   dispatch => ({
     AuthActions: bindActionCreators(authActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch),
   })
-)(withRouter(AuthContainer));
+)(withRouter(onClickOutside(AuthContainer)));

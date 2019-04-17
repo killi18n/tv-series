@@ -10,27 +10,27 @@ class ModalWrapper extends Component {
     animate: false,
   };
 
-  componentDidMount() {
-    const { addListeners } = this.props;
-    if (addListeners) {
-      addListeners();
-    }
-  }
+  //   componentDidMount() {
+  //     // const { addListeners } = this.props;
+  //     // if (addListeners) {
+  //     //   addListeners();
+  //     // }
+  //   }
 
   componentDidUpdate(prevProps) {
-    const { thisVisible } = this.props;
-    const { prevVisible } = prevProps;
+    const { visible: thisVisible } = this.props;
+    const { visible: prevVisible } = prevProps;
     if (prevVisible !== thisVisible) {
       this.startAnimation();
     }
   }
 
-  componentWillUnmount() {
-    const { removeListeners } = this.props;
-    if (removeListeners) {
-      removeListeners();
-    }
-  }
+  //   componentWillUnmount() {
+  //     // const { removeListeners } = this.props;
+  //     // if (removeListeners) {
+  //     //   removeListeners();
+  //     // }
+  //   }
 
   startAnimation = () => {
     this.setState({

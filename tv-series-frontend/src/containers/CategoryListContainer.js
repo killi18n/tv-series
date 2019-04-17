@@ -12,7 +12,7 @@ class CategoryListContainer extends Component {
 
   componentDidUpdate(prevProps) {
     const { page, category } = this.props;
-    const { prevPage, prevCategory } = prevProps;
+    const { page: prevPage, category: prevCategory } = prevProps;
     if (prevPage !== page || prevCategory !== category) {
       this.getAll();
       document.documentElement.scrollTop = 0;

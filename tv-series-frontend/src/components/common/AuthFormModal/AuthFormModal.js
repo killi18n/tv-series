@@ -1,22 +1,24 @@
 import React from 'react';
+import AuthContainer from 'containers/AuthContainer';
 import ModalWrapper from 'components/common/ModalWrapper';
 // import classNames from 'classnames/bind';
 // import styles from './AuthFormModal.scss';
-import AuthForm from '../../auth/AuthForm/AuthForm';
+// import AuthForm from 'components/auth/AuthForm';
+// import ModalWrapperContainer from 'containers/ModalWrapperContainer';
 
 // const cx = classNames.bind(styles);
 
-const AuthFormModal = ({ type, visible, addListeners, removeListeners }) => {
+const AuthFormModal = ({ type, visible }) => {
   return (
     <ModalWrapper
       visible={visible}
-      addListeners={() => addListeners({ type })}
-      removeListeners={() => removeListeners({ type })}
+      //   addListeners={() => addListeners({ type })}
+      //   removeListeners={() => removeListeners({ type })}
     >
       {type === 'login' ? (
-        <AuthForm what="login" />
+        <AuthContainer what="login" />
       ) : (
-        <AuthForm what="register" />
+        <AuthContainer what="register" />
       )}
     </ModalWrapper>
   );

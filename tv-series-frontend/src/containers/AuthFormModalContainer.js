@@ -10,50 +10,54 @@ class AuthFormModalContainer extends Component {
     BaseActions.hideAuthFormModal({ type });
   };
 
-  addListeners = ({ type }) => {
-    if (document && document.documentElement) {
-      document.body.addEventListener('mousedown', () =>
-        this.hideAuthFormModal({ type })
-      );
-    }
+  //   addListeners = ({ type }) => {
+  //     if (document && document.documentElement) {
+  //       document
+  //         .getElementById('authform-modal')
+  //         .addEventListener('mousedown', () => this.hideAuthFormModal({ type }));
+  //     }
 
-    if (window) {
-      window.addEventListener('mousedown', () =>
-        this.hideAuthFormModal({ type })
-      );
-    }
-  };
+  //     if (window) {
+  //       window.document
+  //         .getElementById('authform-modal')
+  //         .addEventListener('mousedown', () => this.hideAuthFormModal({ type }));
+  //     }
+  //   };
 
-  removeListeners = ({ type }) => {
-    if (document && document.documentElement) {
-      document.body.removeEventListener('mousedown', () =>
-        this.hideAuthFormModal({ type })
-      );
-    }
+  //   removeListeners = ({ type }) => {
+  //     if (document && document.documentElement) {
+  //       document
+  //         .getElementById('authform-modal')
+  //         .removeEventListener('mousedown', () =>
+  //           this.hideAuthFormModal({ type })
+  //         );
+  //     }
 
-    if (window) {
-      window.removeEventListener('mousedown', () =>
-        this.hideAuthFormModal({ type })
-      );
-    }
-  };
+  //     if (window) {
+  //       window.document
+  //         .getElementById('authform-modal')
+  //         .removeEventListener('mousedown', () =>
+  //           this.hideAuthFormModal({ type })
+  //         );
+  //     }
+  //   };
 
   render() {
     const { registerModalVisible, loginModalVisible } = this.props;
-    const { addListeners, removeListeners } = this;
+    // const { addListeners, removeListeners } = this;
     return (
       <React.Fragment>
         <AuthFormModal
           type="login"
           visible={loginModalVisible}
-          addListeners={addListeners}
-          removeListeners={removeListeners}
+          //   addListeners={addListeners}
+          //   removeListeners={removeListeners}
         />
         <AuthFormModal
           type="register"
           visible={registerModalVisible}
-          addListeners={addListeners}
-          removeListeners={removeListeners}
+          //   addListeners={addListeners}
+          //   removeListeners={removeListeners}
         />
       </React.Fragment>
     );

@@ -62,11 +62,11 @@ export default handleActions(
     [HIDE_AUTH_FORM_MODAL]: (state, action) => {
       const { type } = action.payload;
       if (type === 'login') {
-        return state.set('registerModalVisible', false);
+        return state.set('loginModalVisible', false);
       }
 
       if (type === 'register') {
-        return state.set('loginModalVisible', false);
+        return state.set('registerModalVisible', false);
       }
 
       return state;
