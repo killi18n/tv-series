@@ -11,17 +11,21 @@ class Base extends Component {
   }
 
   check = async () => {
-    const loggedInfo = storage.get('loggedInfo');
-    if (!loggedInfo) return;
-
     const { AuthActions } = this.props;
+
+    const loggedInfo = storage.get('loggedInfo');
+
+    if (!loggedInfo) {
+      AuthActions.setIsAuthChecking(false);
+      return;
+    }
     AuthActions.setLoggedInfo({ loggedInfo });
 
     try {
       await AuthActions.check();
     } catch (e) {
-      localStorage.remove('loggedInfo');
-      window.location.href = '/auth/login?expired';
+      storage.remove('loggedInfo');
+      window.location.href = '/';
     }
   };
 

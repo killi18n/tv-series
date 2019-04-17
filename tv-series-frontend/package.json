@@ -141,7 +141,16 @@
       "no-nested-ternary": 0,
       "react/jsx-indent": 0,
       "react/no-this-in-sfc": 0,
-      "no-return-assign": 0
+      "no-return-assign": 0,
+      "jsx-a11y/href-no-hash": "off",
+      "jsx-a11y/anchor-is-valid": [
+        "warn",
+        {
+          "aspects": [
+            "invalidHref"
+          ]
+        }
+      ]
     }
   },
   "proxy": "http://localhost:4000"

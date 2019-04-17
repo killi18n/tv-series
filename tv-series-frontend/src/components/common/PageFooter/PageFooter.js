@@ -19,8 +19,8 @@ const PageFooter = ({ admin }) => (
     </div>
 
     {admin && (
-      <Link to="/editor" className={cx('admin')}>
-        포스트 작성
+      <Link to="/editor" className={cx('Column')}>
+        <div className={cx('column-text')}>Upload Post</div>
       </Link>
     )}
   </div>

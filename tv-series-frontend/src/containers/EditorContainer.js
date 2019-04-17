@@ -11,6 +11,11 @@ import queryString from 'query-string';
 class EditorContainer extends Component {
   componentDidMount() {
     const { location, ListActions } = this.props;
+
+    // if (!admin) {
+    //   history.push('/');
+    //   return;
+    // }
     this.initializeInput();
     this.initializeSeries();
     const { id } = queryString.parse(location.search);
@@ -21,9 +26,15 @@ class EditorContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { EditorActions, series } = this.props;
-
-    if (prevProps.series !== series && series.size !== 0) {
+    const {
+      EditorActions,
+      series,
+      isAuthChecking,
+      admin,
+      history,
+    } = this.props;
+    const { series: prevSeries, isAuthChecking: prevAuthChecking } = prevProps;
+    if (prevSeries !== series && series.size !== 0) {
       EditorActions.setServerInputs({ serverSeries: series });
       const files = series.actors.map(actor => {
         return {
@@ -37,6 +48,13 @@ class EditorContainer extends Component {
       };
       EditorActions.setServerFiles({ files });
       EditorActions.setThumbnailFile({ thumbnail });
+    }
+
+    if (isAuthChecking !== prevAuthChecking && !isAuthChecking) {
+      console.log(isAuthChecking);
+      if (!admin) {
+        history.push('/');
+      }
     }
   }
 
@@ -263,6 +281,8 @@ class EditorContainer extends Component {
       serverFiles,
       inputs,
       serverThumbnail,
+      isAuthChecking,
+      admin,
     } = this.props;
     const {
       name,
@@ -275,7 +295,7 @@ class EditorContainer extends Component {
       endYear,
       firstBroadcasted,
     } = inputs.toJS();
-
+    if (isAuthChecking && !admin) return null;
     return (
       <Editor
         onChangeInput={handleChangeInput}
@@ -319,6 +339,9 @@ export default connect(
     prevServerThumbnailList: state.editor.get('prevServerThumbnailList'),
     willRemoveServerFiles: state.editor.get('willRemoveServerFiles'),
     willRemoveThumbnailFile: state.editor.get('willRemoveThumbnailFile'),
+    admin: state.auth.get('admin'),
+    logged: state.auth.get('logged'),
+    isAuthChecking: state.auth.get('isAuthChecking'),
   }),
   dispatch => ({
     EditorActions: bindActionCreators(editorActions, dispatch),

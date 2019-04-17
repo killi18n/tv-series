@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start:dev": "cross-env NODE_PATH=src nodemon --watch src/ src/index.js",
-    "start": "nodemon ./src/index.js"
+    "start": "node ./src/index.js"
   },
   "devDependencies": {
     "eslint": "5.3.0",

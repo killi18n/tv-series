@@ -1,5 +1,6 @@
 const Account = require('models/Account');
 const Joi = require('joi');
+const token = require('lib/token');
 
 exports.register = async ctx => {
   const schema = Joi.object().keys({
@@ -26,45 +27,52 @@ exports.register = async ctx => {
     return;
   }
 
-  const { email, password, passwordCheck } = ctx.request.body;
+  const { email, password } = ctx.request.body;
 
   let existing = null;
 
   try {
     existing = await Account.findByEmailOrUsername(ctx.request.body);
-  } catch (e) {
-    ctx.throw(500, e);
-  }
 
-  if (existing) {
-    ctx.status = 409;
-    ctx.body = {
-      key: existing.email === ctx.request.body.email ? 'email' : 'username',
-    };
-    return;
-  }
+    if (existing) {
+      ctx.status = 409;
+      ctx.body = {
+        key: existing.email === ctx.request.body.email ? 'email' : 'username',
+      };
+      return;
+    }
 
-  let account = null;
+    let account = null;
 
-  let count = null;
-
-  try {
+    let count = null;
     count = await Account.count({}).exec();
-  } catch (e) {
-    ctx.throw(500, e);
-  }
-
-  try {
     account = await Account.register(count, {
       username: email.split('@')[0],
       email,
       password,
     });
+
+    const generatedToken = await token.generateToken({
+      _id: account._id,
+      email: account.email,
+    });
+    ctx.cookies.set('access_token', generatedToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7days
+    });
+    ctx.request.user = {
+      _id: account._od,
+      email: account.email,
+    };
+
+    ctx.body = {
+      email: account.email,
+      isAdmin: account.admin,
+    };
+    ctx.status = 200;
   } catch (e) {
     ctx.throw(500, e);
   }
-
-  ctx.body = account.email;
 };
 
 exports.login = async ctx => {
@@ -88,31 +96,30 @@ exports.login = async ctx => {
 
   try {
     account = await Account.findByEmail(email);
+
+    if (!account || !account.validatePassword(password)) {
+      ctx.status = 403;
+      return;
+    }
+
+    const generatedToken = await account.generateToken();
+
+    ctx.cookies.set('access_token', generatedToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
+    ctx.request.user = {
+      _id: account._id,
+      email: account.email,
+    };
+    ctx.body = {
+      email: account.email,
+      isAdmin: account.admin,
+    };
+    ctx.status = 200;
   } catch (e) {
     ctx.throw(500, e);
   }
-
-  if (!account || !account.validatePassword(password)) {
-    ctx.status = 403;
-    return;
-  }
-
-  let token = null;
-
-  try {
-    token = await account.generateToken();
-  } catch (e) {
-    ctx.throw(500, e);
-  }
-
-  ctx.cookies.set('access_token', token, {
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-  });
-  ctx.body = {
-    email: account.email,
-    admin: account.admin,
-  };
 };
 
 exports.check = async ctx => {
@@ -126,9 +133,10 @@ exports.check = async ctx => {
 };
 
 exports.logout = async ctx => {
-  ctx.cookies.set('access_token', null, {
+  ctx.cookies.set('access_token', '', {
     maxAge: 0,
     httpOnly: true,
   });
+  ctx.request.user = undefined;
   ctx.status = 204;
 };

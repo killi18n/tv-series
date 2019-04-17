@@ -21,16 +21,21 @@ class AuthContainer extends Component {
   }
 
   handleClickOutside = () => {
+    this.hideAuthFormModal();
+  };
+
+  hideAuthFormModal = () => {
     const { BaseActions, what } = this.props;
     BaseActions.hideAuthFormModal({ type: what });
   };
 
   handleRegister = async () => {
-    const { AuthActions, email, password, passwordCheck, history } = this.props;
+    const { AuthActions, email, password, passwordCheck } = this.props;
 
     try {
       await AuthActions.register({ email, password, passwordCheck });
-      history.push('/auth/login');
+      // history.push('/auth/login');
+      this.hideAuthFormModal();
     } catch (e) {
       console.log(e);
     }
@@ -43,11 +48,12 @@ class AuthContainer extends Component {
   };
 
   handleLogin = async () => {
-    const { AuthActions, email, password, history } = this.props;
+    const { AuthActions, email, password } = this.props;
 
     try {
       await AuthActions.login({ email, password });
-      history.push('/');
+      // history.push('/');
+      this.hideAuthFormModal();
     } catch (e) {
       console.log(e);
     }
