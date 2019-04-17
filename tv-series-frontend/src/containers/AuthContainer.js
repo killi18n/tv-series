@@ -22,7 +22,6 @@ class AuthContainer extends Component {
 
   handleClickOutside = () => {
     const { BaseActions, what } = this.props;
-    console.log(what);
     BaseActions.hideAuthFormModal({ type: what });
   };
 
