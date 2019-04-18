@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as editorActions from 'store/modules/editor';
@@ -8,20 +8,15 @@ import Editor from 'components/admin/Editor';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 
-class EditorContainer extends Component {
+class EditorContainer extends React.Component {
   componentDidMount() {
-    const { location, ListActions } = this.props;
-
-    // if (!admin) {
-    //   history.push('/');
-    //   return;
-    // }
+    const { location } = this.props;
     this.initializeInput();
     this.initializeSeries();
     const { id } = queryString.parse(location.search);
 
     if (id) {
-      ListActions.getSeriesById({ id });
+      this.getSeriesById({ id });
     }
   }
 
@@ -51,7 +46,6 @@ class EditorContainer extends Component {
     }
 
     if (isAuthChecking !== prevAuthChecking && !isAuthChecking) {
-      console.log(isAuthChecking);
       if (!admin) {
         history.push('/');
       }
@@ -74,7 +68,7 @@ class EditorContainer extends Component {
     try {
       await EditorActions.addServerFiles(fd, config);
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -86,7 +80,7 @@ class EditorContainer extends Component {
       await EditorActions.setPrevServerThumbnailList();
       await EditorActions.addServerThumbnail(fd, config);
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -111,7 +105,7 @@ class EditorContainer extends Component {
     try {
       await EditorActions.uploadImage(fd, config);
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -127,7 +121,7 @@ class EditorContainer extends Component {
         });
       }
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -139,7 +133,7 @@ class EditorContainer extends Component {
     try {
       await EditorActions.filterImageApi({ image });
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -151,7 +145,16 @@ class EditorContainer extends Component {
     try {
       await EditorActions.filterImageApi({ image });
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
+    }
+  };
+
+  getSeriesById = async ({ id }) => {
+    const { ListActions } = this.props;
+    try {
+      await ListActions.getSeriesById({ id });
+    } catch (e) {
+      throw new Error(e);
     }
   };
 
@@ -169,7 +172,7 @@ class EditorContainer extends Component {
       willRemoveThumbnailFile,
       serverFiles,
       inputs,
-      postedPost,
+      // postedPost,
     } = this.props;
     const {
       name,
@@ -255,9 +258,10 @@ class EditorContainer extends Component {
         endYear,
         firstBroadcasted,
       });
+      const { postedPost } = this.props;
       history.push(`/series/${postedPost._id}`);
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -283,6 +287,8 @@ class EditorContainer extends Component {
       serverThumbnail,
       isAuthChecking,
       admin,
+      location,
+      getSeriesDone,
     } = this.props;
     const {
       name,
@@ -295,9 +301,13 @@ class EditorContainer extends Component {
       endYear,
       firstBroadcasted,
     } = inputs.toJS();
+    const { id } = queryString.parse(location.search);
     if (isAuthChecking && !admin) return null;
+    // if (!getSeriesDone) return null;
+    if (id && (!getSeriesDone || Object.keys(series).length === 0)) return null;
     return (
       <Editor
+        id={id}
         onChangeInput={handleChangeInput}
         name={name}
         teasername={teasername}
@@ -342,6 +352,7 @@ export default connect(
     admin: state.auth.get('admin'),
     logged: state.auth.get('logged'),
     isAuthChecking: state.auth.get('isAuthChecking'),
+    getSeriesDone: state.list.get('getSeriesDone'),
   }),
   dispatch => ({
     EditorActions: bindActionCreators(editorActions, dispatch),

@@ -25,6 +25,7 @@ const initialState = Map({
   series: Map({}),
   all: List(),
   lastPage: null,
+  getSeriesDone: false,
 });
 
 // reducer
@@ -51,7 +52,7 @@ export default handleActions(
       type: GET_SERIES_BY_ID,
       onSuccess: (state, action) => {
         const { data: series } = action.payload;
-        return state.set('series', series);
+        return state.set('series', series).set('getSeriesDone', true);
       },
     }),
     ...pender({

@@ -26,7 +26,7 @@ class AskPostModalContainer extends Component {
       this.hidePostModal();
       history.push('/');
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 

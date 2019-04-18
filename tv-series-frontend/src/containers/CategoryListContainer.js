@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 import CategoryList from 'components/contents/CategoryList';
 import data from 'data.json';
 import * as listActions from 'store/modules/list';
@@ -25,12 +26,18 @@ class CategoryListContainer extends Component {
     try {
       await ListActions.getAll({ page, genre: category });
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
+  };
+
+  handleClickTag = ({ tag }) => {
+    const { history } = this.props;
+    history.push(`/list/${tag}`);
   };
 
   render() {
     const { category, all, lastPage, page } = this.props;
+    const { handleClickTag } = this;
     return (
       <CategoryList
         categories={data.categories}
@@ -38,6 +45,7 @@ class CategoryListContainer extends Component {
         all={all}
         lastPage={lastPage}
         page={page}
+        onClickTag={handleClickTag}
       />
     );
   }
@@ -50,4 +58,4 @@ export default connect(
   dispatch => ({
     ListActions: bindActionCreators(listActions, dispatch),
   })
-)(CategoryListContainer);
+)(withRouter(CategoryListContainer));

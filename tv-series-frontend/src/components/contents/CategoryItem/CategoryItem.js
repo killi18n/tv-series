@@ -5,7 +5,7 @@ import styles from './CategoryItem.scss';
 
 const cx = classNames.bind(styles);
 
-const CategoryItem = ({ thumbnail, name, id, actors, genres }) => {
+const CategoryItem = ({ thumbnail, name, id, actors, genres, onClickTag }) => {
   const actorList = actors.slice(0, 3).map((actor, i) => {
     if (i === 2 || i === actors.size - 1) {
       return (
@@ -24,9 +24,16 @@ const CategoryItem = ({ thumbnail, name, id, actors, genres }) => {
 
   const genreList = genres.map((genre, i) => {
     return (
-      <Link to={`/list/${genre}`} className={cx('genre')} key={i}>
+      <div
+        className={cx('genre')}
+        key={i}
+        onClick={e => {
+          e.preventDefault();
+          onClickTag({ tag: genre });
+        }}
+      >
         #{genre}
-      </Link>
+      </div>
     );
   });
 

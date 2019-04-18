@@ -7,7 +7,7 @@ import styles from './CategoryList.scss';
 
 const cx = classNames.bind(styles);
 
-const CategoryList = ({ category, all, lastPage, page }) => {
+const CategoryList = ({ category, all, lastPage, page, onClickTag }) => {
   const categoryList = all.map(targetCategory => (
     <CategoryItem
       key={targetCategory.get('_id')}
@@ -16,6 +16,7 @@ const CategoryList = ({ category, all, lastPage, page }) => {
       name={targetCategory.get('name')}
       actors={targetCategory.get('actors')}
       genres={targetCategory.get('genre')}
+      onClickTag={onClickTag}
     />
   ));
   if (all.size === 0) return null;

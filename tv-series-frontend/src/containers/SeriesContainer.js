@@ -31,7 +31,7 @@ class SeriesContainer extends Component {
     try {
       await ListActions.getSeriesById({ id });
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 

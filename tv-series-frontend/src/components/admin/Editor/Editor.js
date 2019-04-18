@@ -6,6 +6,7 @@ import styles from './Editor.scss';
 const cx = classNames.bind(styles);
 
 const Editor = ({
+  id,
   onChangeInput,
   name,
   teasername,
@@ -94,24 +95,24 @@ const Editor = ({
   };
 
   const handleFilterImage = e => {
-    const { id } = e.target;
-    onFilter({ image: id });
+    const { id: targetId } = e.target;
+    onFilter({ image: targetId });
   };
 
   const handleFilterThumbnail = e => {
-    const { id } = e.target;
-    onFilterThumbnail({ image: id });
+    const { id: targetId } = e.target;
+    onFilterThumbnail({ image: targetId });
   };
 
   const handleFilterServerThumbnail = e => {
-    const { id } = e.target;
+    const { id: targetId } = e.target;
     // console.log(id);
-    onFilterServerThumbnail({ removed: id });
+    onFilterServerThumbnail({ removed: targetId });
   };
 
   const handleFilterServerImage = e => {
-    const { id } = e.target;
-    onFilterServerFiles({ removed: id });
+    const { id: targetId } = e.target;
+    onFilterServerFiles({ removed: targetId });
   };
   const handleClickImageServer = () => {
     this.actorImageServer.click();
@@ -148,10 +149,12 @@ const Editor = ({
   });
 
   const serverFileListArr = [];
-  if (series.size !== 0) {
-    series.forEach(actor => {
-      serverFileListArr.push(actor.img);
-    });
+  if (id && Object.keys(series).length > 0) {
+    if (series.actors.length !== 0) {
+      series.actors.forEach(actor => {
+        serverFileListArr.push(actor.img);
+      });
+    }
   }
 
   const serverFileList = serverFiles.map(file => {

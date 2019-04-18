@@ -21,7 +21,7 @@ class SideBarContainer extends Component {
       storage.remove('loggedInfo');
       window.location.href = '/';
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 

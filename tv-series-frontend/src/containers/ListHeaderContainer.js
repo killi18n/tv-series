@@ -23,7 +23,7 @@ class ListHeaderContainer extends Component {
       await AuthActions.logout();
       history.push('/');
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 

@@ -1,30 +1,34 @@
-@import "common";
+@import 'common';
 
 .OneLine {
   @include material-shadow(4, 0.5);
   display: flex;
   background: white;
   // margin-left: 1rem;
-  padding-top: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 1rem;
+  // padding-top: 1rem;
+  // padding-right: 1rem;
+  // padding-bottom: 1rem;
   .left {
     // padding: 1rem;
     .thumbnail {
+      width: 250px;
+      height: 250px;
       img {
         width: 250px;
         height: 250px;
+        object-fit: cover;
 
-        @include media("<=medium") {
+        @include media('<=medium') {
           width: 110px;
           height: 110px;
         }
       }
-      margin-left: 1rem;
+      // margin-left: 1rem;
     }
   }
 
   .right {
+    padding-top: 1rem;
     padding-bottom: 1rem;
     padding-right: 1rem;
     padding-left: 1rem;
@@ -32,7 +36,7 @@
       font-size: 2rem;
       font-weight: 500;
 
-      @include media("<=medium") {
+      @include media('<=medium') {
         font-size: 1rem;
         font-weight: 500;
       }
@@ -43,7 +47,7 @@
       font-weight: 500;
       display: flex;
 
-      @include media("<=medium") {
+      @include media('<=medium') {
         font-size: 0.75rem;
         font-weight: 500;
       }

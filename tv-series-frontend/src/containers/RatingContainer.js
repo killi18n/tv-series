@@ -24,7 +24,7 @@ class RatingContainer extends Component {
     try {
       await RateActions.getRatingOfItem({ id });
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -48,7 +48,7 @@ class RatingContainer extends Component {
         }
       });
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -66,7 +66,7 @@ class RatingContainer extends Component {
       this.getRatingOfItem();
       this.getRatedList();
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 

@@ -37,7 +37,7 @@ class AuthContainer extends Component {
       // history.push('/auth/login');
       this.hideAuthFormModal();
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
@@ -55,7 +55,7 @@ class AuthContainer extends Component {
       // history.push('/');
       this.hideAuthFormModal();
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 

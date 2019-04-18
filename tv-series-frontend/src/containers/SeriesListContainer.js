@@ -17,7 +17,7 @@ class SeriesListContainer extends Component {
       await ListActions.getTop4Rated();
       await ListActions.getBrand4();
     } catch (e) {
-      console.log(e);
+      throw new Error(e);
     }
   };
 
