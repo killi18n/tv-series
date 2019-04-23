@@ -55,7 +55,7 @@ class AuthContainer extends Component {
       // history.push('/');
       this.hideAuthFormModal();
     } catch (e) {
-      throw new Error(e);
+      console.log(e);
     }
   };
 
@@ -71,6 +71,13 @@ class AuthContainer extends Component {
     }
   };
 
+  openSignupModal = () => {
+    const { BaseActions } = this.props;
+
+    BaseActions.hideAuthFormModal({ type: 'login' });
+    BaseActions.showAuthFormModal({ type: 'register' });
+  };
+
   intializeInputs = () => {
     const { AuthActions } = this.props;
     AuthActions.initializeInputs();
@@ -84,6 +91,7 @@ class AuthContainer extends Component {
       handleKeydownLogin,
       handleRegister,
       handleKeydownRegister,
+      openSignupModal,
     } = this;
     return (
       <AuthForm
@@ -96,6 +104,7 @@ class AuthContainer extends Component {
         onKeydownLogin={handleKeydownLogin}
         onRegister={handleRegister}
         onKeydownRegister={handleKeydownRegister}
+        openSignupModal={openSignupModal}
         error={error}
       />
     );

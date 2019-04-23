@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
 import styles from './AuthForm.scss';
 
 const cx = classNames.bind(styles);
@@ -15,6 +14,7 @@ const AuthForm = ({
   onKeydownLogin,
   onRegister,
   onKeydownRegister,
+  openSignupModal,
   error,
 }) => {
   const handleChangeInput = e => {
@@ -57,9 +57,9 @@ const AuthForm = ({
             </div>
           </div>
           <div className={cx('desc')}>
-            <Link className={cx('text')} to="/auth/register">
+            <div onClick={openSignupModal} className={cx('text')}>
               Sign Up
-            </Link>
+            </div>
           </div>
         </div>
       )}
