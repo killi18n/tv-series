@@ -46,12 +46,13 @@ class SeriesContainer extends Component {
 
   render() {
     const { showSideBar, showPostModal } = this;
-    const { id, series, admin } = this.props;
+    const { id, series, admin, loading } = this.props;
 
-    if (series === undefined) return null;
+    // if (series === undefined) return null;
     return (
       <SeriesTemplate>
         <SeriesHeader
+          loading={loading}
           thumbnail={series.thumbnail}
           name={series.name}
           genres={series.genre}
@@ -63,6 +64,7 @@ class SeriesContainer extends Component {
           showPostModal={showPostModal}
         />
         <SeriesMain
+          loading={loading}
           id={id}
           story={series.story}
           teasers={series.teasers}
@@ -77,6 +79,7 @@ export default connect(
   state => ({
     series: state.list.get('series'),
     admin: state.auth.get('admin'),
+    loading: state.pender.pending['list/GET_SERIES_BY_ID'],
   }),
   dispatch => ({
     // SeriesActions: bindActionCreators(seriesActions, dispatch),

@@ -2,6 +2,7 @@
 
 .SeriesList {
   width: 1024px;
+
   @include media('<=medium') {
     width: 100%;
   }
@@ -26,63 +27,17 @@
     }
   }
   .ListWrapper {
-    display: flex;
-    white-space: no-wrap;
-    overflow-x: auto;
+    margin-top: 0.5rem;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
-    .list {
-      @include material-shadow(4, 0.5);
-      cursor: pointer;
+    margin-bottom: 0.5rem;
+    .inner {
+      // width: 110%;
+      padding-left: 0.5rem;
+      height: 390px;
       display: flex;
-
-      flex-direction: column;
-      // padding-left: 1rem;
-      // padding-right: 1rem;
-      // margin: 1rem;
-      margin-right: 0.5rem;
-      margin-left: 0.5rem;
-      margin-bottom: 1rem;
-      background: white;
-      width: 280px;
-      height: 420px;
-      // padding: 1rem;
-      @include media('<=medium') {
-        width: 110px;
-        height: 190px;
-        padding: 0;
-      }
-
-      .thumbnail {
-        height: 350px;
-        img {
-          width: 280px;
-          height: 350px;
-          @include media('<=medium') {
-            width: 110px;
-            height: 150px;
-          }
-        }
-      }
-
-      .title {
-        height: 130px;
-        user-select: none;
-        font-size: 1.5rem;
-        font-weight: 500;
-        padding-left: 5px;
-        padding-right: 5px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-
-        display: flex;
-        align-items: center;
-
-        @include media('<=medium') {
-          font-size: 0.75rem;
-          font-weight: 600;
-        }
-      }
+      white-space: no-wrap;
+      overflow-x: auto;
     }
   }
 }

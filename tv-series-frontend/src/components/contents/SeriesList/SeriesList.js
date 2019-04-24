@@ -37,14 +37,18 @@ const SeriesList = ({ top4Rated, brand4 }) => {
           View All
         </Link>
       </div>
-      <div className={cx('ListWrapper')}>{top4List}</div>
+      <div className={cx('ListWrapper')}>
+        <div className={cx('inner')}>{top4List}</div>
+      </div>
       <div className={cx('label')}>
         <div className={cx('left-label')}>Brand New Seires</div>
         <Link to="/list/all" className={cx('right-label')}>
           View All
         </Link>
       </div>
-      <div className={cx('ListWrapper')}>{brand4List}</div>
+      <div className={cx('ListWrapper')}>
+        <div className={cx('inner')}>{brand4List}</div>
+      </div>
     </div>
   );
 };

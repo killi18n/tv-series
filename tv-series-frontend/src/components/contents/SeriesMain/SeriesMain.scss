@@ -4,30 +4,30 @@
   padding-right: 1rem;
   width: 1600px;
   margin: 0 auto;
-  @include media("<1600px") {
+  @include media('<1600px') {
     width: 1200px;
   }
-  @include media("<1200px") {
+  @include media('<1200px') {
     width: 1024px;
   }
-  @include media("<1024px") {
+  @include media('<1024px') {
     width: 768px;
   }
-  @include media("<768px") {
+  @include media('<768px') {
     width: 100%;
     padding: 0;
   }
   .wrapper {
     margin-left: 300px;
-    @include media("<1024px") {
+    @include media('<1024px') {
       margin-left: 150px;
     }
     padding: 2rem;
-    @include media("<768px") {
+    @include media('<768px') {
       margin-left: 0px;
       padding: 0;
     }
-    section+section {
+    section + section {
       margin-top: 4rem;
     }
     .content {
@@ -48,6 +48,10 @@
         line-height: 1.75rem;
         font-size: 1.25rem;
         white-space: pre-wrap;
+      }
+
+      .SeriesMain-Loading {
+        height: 3rem;
       }
     }
   }

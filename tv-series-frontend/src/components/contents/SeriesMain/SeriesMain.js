@@ -11,13 +11,17 @@ import styles from './SeriesMain.scss';
 
 const cx = classNames.bind(styles);
 
-const SeriesMain = ({ teasers, story, actors, id }) => (
+const SeriesMain = ({ teasers, story, actors, id, loading }) => (
   <div className={cx('SeriesMain')}>
     <div className={cx('wrapper')}>
       <div className={cx('content')}>
         <section>
           <h2>평가 하기</h2>
-          <RatingContainer id={id} />
+          {loading ? (
+            <div className={cx('SeriesMain-Loading')}>Loading...</div>
+          ) : (
+            <RatingContainer id={id} />
+          )}
         </section>
         <section>
           <h2>Rating</h2>

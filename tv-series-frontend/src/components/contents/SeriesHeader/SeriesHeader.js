@@ -16,8 +16,14 @@ const SeriesHeader = ({
   onClickMenu,
   admin,
   showPostModal,
+  loading,
 }) => {
-  if (genres === undefined) return null;
+  if (genres === undefined)
+    return (
+      <div className={cx('SeriesHeader')}>
+        <div className={cx('wrapper-loading')}>Loading...</div>
+      </div>
+    );
   return (
     <div className={cx('SeriesHeader')}>
       <div className={cx('wrapper')}>
@@ -32,7 +38,11 @@ const SeriesHeader = ({
         <div className={cx('header-contents')}>
           <div className={cx('thumbnail-area')}>
             <div className={cx('floating-thumbnail')}>
-              <img src={`/uploads/${thumbnail}`} alt="thumbnail" />
+              {loading ? (
+                <div className={cx('SeriesHeader-Loading')}>Loading....</div>
+              ) : (
+                <img src={`/uploads/${thumbnail}`} alt="thumbnail" />
+              )}
             </div>
           </div>
           <div className={cx('information')}>
@@ -61,6 +71,7 @@ const SeriesHeader = ({
           </div>
         </div>
       </div>
+      )
     </div>
   );
 };

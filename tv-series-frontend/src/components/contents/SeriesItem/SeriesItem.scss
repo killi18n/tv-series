@@ -1,0 +1,71 @@
+@import 'common';
+
+.list {
+  // @include material-shadow(4, 0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  display: flex;
+
+  border-radius: 2px;
+
+  &:hover {
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.25), 0 3px 4px rgba(0, 0, 0, 0.22);
+  }
+
+  flex-direction: column;
+  // padding-left: 1rem;
+  // padding-right: 1rem;
+  // margin: 1rem;
+  //   margin-right: 0.5rem;
+  //   margin-left: 0.5rem;
+  //   margin-bottom: 1rem;
+  //   padding: 1rem;
+
+  background: white;
+  width: 280px;
+  height: 350px;
+  // padding: 1rem;
+  @include media('<=medium') {
+    width: 110px;
+    height: 120px;
+    padding: 0;
+  }
+
+  .thumbnail {
+    height: 290px;
+
+    img {
+      border-radius: 2px;
+      width: 280px;
+      height: 290px;
+      @include media('<=medium') {
+        width: 110px;
+        height: 80px;
+      }
+    }
+  }
+
+  .title {
+    height: 60px;
+    user-select: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    display: flex;
+    align-items: center;
+
+    @include media('<=medium') {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.list + .list {
+  margin-left: 2rem;
+}
