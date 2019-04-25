@@ -18,10 +18,50 @@ const SeriesHeader = ({
   showPostModal,
   loading,
 }) => {
-  if (genres === undefined)
+  if (!genres || !name || !startYear || !endYear || loading)
     return (
       <div className={cx('SeriesHeader')}>
-        <div className={cx('wrapper-loading')}>Loading...</div>
+        <div className={cx('wrapper')}>
+          <header>
+            <Link to="/" className="logo">
+              Fresh Tomato
+            </Link>
+            <div className={cx('menu-button')} onClick={onClickMenu}>
+              <MenuIcon />
+            </div>
+          </header>
+          <div className={cx('header-contents')}>
+            <div className={cx('thumbnail-area')}>
+              <div className={cx('floating-thumbnail')}>
+                <div className={cx('empty-thumbnail')} />
+              </div>
+            </div>
+            <div className={cx('information')}>
+              <div>
+                <h1>{name}</h1>
+                <div className={cx('sub-info')}>
+                  <span>
+                    {/* {genres.map(genre => {
+                      return (
+                        <Link to={`/list/${genre}`} key={genre}>
+                          {`#${genre}`}
+                        </Link>
+                      );
+                    })} */}
+                  </span>
+                  <span>
+                    {startYear}-{endYear}
+                  </span>
+                </div>
+              </div>
+              {admin && (
+                <div className={cx('play-button')} onClick={showPostModal}>
+                  수정 / 삭제
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     );
   return (
@@ -71,7 +111,6 @@ const SeriesHeader = ({
           </div>
         </div>
       </div>
-      )
     </div>
   );
 };
