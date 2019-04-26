@@ -1,7 +1,9 @@
 @import 'common';
 
+$list-width: 280px;
+$list-height: 350px;
+
 .list {
-  // @include material-shadow(4, 0.5);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
@@ -14,21 +16,14 @@
   }
 
   flex-direction: column;
-  // padding-left: 1rem;
-  // padding-right: 1rem;
-  // margin: 1rem;
-  //   margin-right: 0.5rem;
-  //   margin-left: 0.5rem;
-  //   margin-bottom: 1rem;
-  //   padding: 1rem;
 
   background: white;
-  width: 280px;
-  height: 350px;
-  // padding: 1rem;
+  width: $list-width;
+  height: $list-height;
+
   @include media('<=medium') {
-    width: 110px;
-    height: 120px;
+    width: $list-width - 50px;
+    height: $list-height - 50px;
     padding: 0;
   }
 
@@ -40,8 +35,8 @@
       width: 280px;
       height: 290px;
       @include media('<=medium') {
-        width: 110px;
-        height: 80px;
+        width: $list-width - 50px;
+        height: $list-height - 100px;
       }
     }
   }
@@ -60,7 +55,7 @@
     align-items: center;
 
     @include media('<=medium') {
-      font-size: 0.75rem;
+      font-size: 1rem;
       font-weight: 600;
     }
   }

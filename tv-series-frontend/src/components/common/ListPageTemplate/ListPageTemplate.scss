@@ -1,9 +1,12 @@
 @import 'common';
 
 .ListPageTemplate {
-    display: flex;
-    flex-direction: column;
-    main {
-        min-height: calc(100vh - 8rem);
-    }
+  display: flex;
+  flex-direction: column;
+
+  main {
+    // max-width: 100%;
+    // width: calc(100vw);
+    min-height: calc(100vh - 8rem);
+  }
 }

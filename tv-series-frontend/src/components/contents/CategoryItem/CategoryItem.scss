@@ -1,43 +1,57 @@
 @import 'common';
 
+$thumbnail-size: 200px;
+
 .OneLine {
   @include material-shadow(4, 0.5);
   display: flex;
   background: white;
-  // margin-left: 1rem;
-  // padding-top: 1rem;
-  // padding-right: 1rem;
-  // padding-bottom: 1rem;
+  border-radius: 3px;
+  height: 200px;
+  @include media('<=medium') {
+    height: $thumbnail-size - 30px;
+  }
   .left {
-    // padding: 1rem;
     .thumbnail {
-      width: 250px;
-      height: 250px;
+      width: $thumbnail-size;
+      height: $thumbnail-size;
+
+      @include media('<=medium') {
+        width: $thumbnail-size - 30px;
+        height: $thumbnail-size - 30px;
+      }
+
       img {
-        width: 250px;
-        height: 250px;
+        width: $thumbnail-size;
+        height: $thumbnail-size;
         object-fit: cover;
+        border-radius: 3px;
 
         @include media('<=medium') {
-          width: 110px;
-          height: 110px;
+          width: $thumbnail-size - 30px;
+          height: $thumbnail-size - 30px;
         }
       }
-      // margin-left: 1rem;
     }
   }
 
   .right {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+
+    @include media('<=medium') {
+      margin-left: 1rem;
+    }
+
     .title {
       font-size: 2rem;
       font-weight: 500;
 
       @include media('<=medium') {
-        font-size: 1rem;
+        font-size: 1.25rem;
         font-weight: 500;
       }
     }
@@ -67,7 +81,7 @@
     }
 
     .actors + .genres {
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
 
     .title + .actors {
@@ -77,6 +91,5 @@
 }
 
 .OneLine + .OneLine {
-  // border-top: 1px solid black;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }

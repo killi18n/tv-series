@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import SideBarContainer from 'containers/SideBarContainer';
+// import SideBarContainer from 'containers/SideBarContainer';
 import ListHeaderContainer from 'containers/ListHeaderContainer';
 import FooterContainer from 'containers/FooterContainer';
 import styles from './ListPageTemplate.scss';
@@ -12,7 +12,7 @@ const ListPageTemplate = ({ children }) => (
     <ListHeaderContainer />
     <main>{children}</main>
     <FooterContainer />
-    <SideBarContainer />
+    {/* <SideBarContainer /> */}
   </div>
 );
 

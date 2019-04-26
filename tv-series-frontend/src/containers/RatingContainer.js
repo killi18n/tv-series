@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as baseActions from 'store/modules/base';
 import * as rateActions from 'store/modules/rate';
 import Rating from 'components/contents/Rating';
 import storage from 'lib/storage';
@@ -53,11 +54,11 @@ class RatingContainer extends Component {
   };
 
   handleRate = async ({ what }) => {
-    const { RateActions, id, history } = this.props;
+    const { BaseActions, RateActions, id } = this.props;
     const loggedInfo = storage.get('loggedInfo');
 
     if (!loggedInfo) {
-      history.push('/auth/login');
+      BaseActions.showAuthFormModal({ type: 'login' });
       return;
     }
 
@@ -69,6 +70,8 @@ class RatingContainer extends Component {
       throw new Error(e);
     }
   };
+
+  showAuthModal = () => {};
 
   render() {
     const { selected, liked, hated } = this.props;
@@ -95,5 +98,6 @@ export default connect(
   }),
   dispatch => ({
     RateActions: bindActionCreators(rateActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch),
   })
 )(withRouter(RatingContainer));

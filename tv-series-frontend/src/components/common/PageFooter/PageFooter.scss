@@ -1,33 +1,43 @@
 @import 'common';
 
 .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 8rem;
-    background: $oc-gray-8;
+  //   width: calc(100vw);
+  //   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 8rem;
+  background: $oc-gray-8;
 
-    .Column {
-        .logo {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-        }
+  .Column {
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
 
-        .admin {
-            color: white;
-            margin-top: 1rem;
-        }
-
-        .column-text {
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-        }
+      @include media('<=medium') {
+        font-size: 1.25rem;
+      }
     }
 
-    .Column + .Column {
-        margin-top: 1rem;
+    .admin {
+      color: white;
+      margin-top: 1rem;
     }
+
+    .column-text {
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+
+      @include media('<=medium') {
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .Column + .Column {
+    margin-top: 1rem;
+  }
 }
