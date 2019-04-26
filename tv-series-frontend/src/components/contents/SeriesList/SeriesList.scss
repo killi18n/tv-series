@@ -1,5 +1,7 @@
 @import 'common';
 
+$inner-height: 430px;
+
 .SeriesList {
   width: 1024px;
 
@@ -16,6 +18,10 @@
       font-size: 1.5rem;
       font-weight: 600;
       padding: 1rem;
+
+      @include media('<=mobile') {
+        font-size: 1rem;
+      }
     }
 
     .right-label {
@@ -24,20 +30,36 @@
       color: #91a7ff;
       cursor: pointer;
       user-select: none;
+
+      @include media('<=mobile') {
+        font-size: 0.75rem;
+      }
     }
   }
   .ListWrapper {
-    margin-top: 0.5rem;
+    // margin-top: 0.5rem;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
-    margin-bottom: 0.5rem;
+    // margin-bottom: 0.5rem;
+    display: flex;
+
     .inner {
       // width: 110%;
       padding-left: 0.5rem;
-      height: 390px;
+      padding-right: 0.5rem;
+      height: 430px;
       display: flex;
       white-space: no-wrap;
       overflow-x: auto;
+      align-items: center;
+
+      @include media('<=medium') {
+        height: $inner-height - 120px;
+      }
+
+      @include media('<=mobile') {
+        height: $inner-height - 230px;
+      }
     }
   }
 }

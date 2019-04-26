@@ -19,7 +19,7 @@ $list-height: 350px;
 
   background: white;
   width: $list-width;
-  height: $list-height;
+  height: $list-height + 60px;
 
   @include media('<=medium') {
     width: $list-width - 50px;
@@ -27,16 +27,36 @@ $list-height: 350px;
     padding: 0;
   }
 
+  @include media('<=mobile') {
+    width: $list-width - 180px;
+    height: $list-height - 180px;
+    padding: 0;
+  }
+
   .thumbnail {
-    height: 290px;
+    height: $list-height;
+
+    // @include media('<=medium') {
+    //   height: $list-height - 40px;
+    // }
+
+    // @include media('<=mobile') {
+    //   height: $list-height;
+    // }
 
     img {
       border-radius: 2px;
-      width: 280px;
-      height: 290px;
+      width: $list-width;
+      height: $list-height;
+
       @include media('<=medium') {
         width: $list-width - 50px;
         height: $list-height - 100px;
+      }
+
+      @include media('<=mobile') {
+        width: $list-width - 180px;
+        height: $list-height - 230px;
       }
     }
   }
@@ -63,4 +83,8 @@ $list-height: 350px;
 
 .list + .list {
   margin-left: 2rem;
+
+  @include media('<=mobile') {
+    margin-left: 1rem;
+  }
 }
