@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import {
   SeriesListPage,
   SeriesPage,
-  IntroductionPage,
+  // IntroductionPage,
   CategoryListPage,
   EditorPage,
 } from 'pages';
@@ -14,7 +14,7 @@ const App = () => {
     <div>
       <Switch>
         <Route exact path="/" component={SeriesListPage} />
-        <Route path="/introduction" component={IntroductionPage} />
+        {/* <Route path="/introduction" component={IntroductionPage} /> */}
         <Route path="/editor" component={EditorPage} />
         <Route path="/list/:category/:page?" component={CategoryListPage} />
         <Route path="/series/:id" component={SeriesPage} />

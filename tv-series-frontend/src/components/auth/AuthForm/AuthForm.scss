@@ -84,9 +84,11 @@
     }
 
     .desc {
+      display: flex;
       text-align: right;
 
       .text {
+        margin-left: auto;
         color: $oc-blue-3;
         cursor: pointer;
       }

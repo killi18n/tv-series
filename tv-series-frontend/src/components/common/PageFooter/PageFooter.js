@@ -12,11 +12,11 @@ const PageFooter = ({ admin }) => (
         Fresh Tomato
       </Link>
     </div>
-    <div className={cx('Column')}>
+    {/* <div className={cx('Column')}>
       <Link className={cx('column-text')} to="/introduction">
         Introduction
       </Link>
-    </div>
+    </div> */}
 
     {admin && (
       <Link to="/editor" className={cx('Column')}>
