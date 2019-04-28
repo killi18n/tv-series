@@ -23,7 +23,7 @@ const SeriesHeader = ({
       <div className={cx('SeriesHeader')}>
         <div className={cx('wrapper')}>
           <header>
-            <Link to="/" className="logo">
+            <Link to="/" className={cx('logo')}>
               Fresh Tomato
             </Link>
             <div className={cx('menu-button')} onClick={onClickMenu}>
@@ -68,7 +68,7 @@ const SeriesHeader = ({
     <div className={cx('SeriesHeader')}>
       <div className={cx('wrapper')}>
         <header>
-          <Link to="/" className="logo">
+          <Link to="/" className={cx('logo')}>
             Fresh Tomato
           </Link>
           <div className={cx('menu-button')} onClick={onClickMenu}>

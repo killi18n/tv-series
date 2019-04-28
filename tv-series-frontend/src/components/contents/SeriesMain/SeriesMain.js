@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames/bind';
-import EpisodeItemList from 'components/contents/EpisodeItemList';
+// import EpisodeItemList from 'components/contents/EpisodeItemList';
 import ActorList from 'components/contents/ActorList';
 
 // import Rating from 'components/common/Rating/Rating';
@@ -11,7 +11,7 @@ import styles from './SeriesMain.scss';
 
 const cx = classNames.bind(styles);
 
-const SeriesMain = ({ teasers, story, actors, id, loading }) => (
+const SeriesMain = ({ story, actors, id, loading }) => (
   <div className={cx('SeriesMain')}>
     <div className={cx('wrapper')}>
       <div className={cx('content')}>
@@ -27,10 +27,10 @@ const SeriesMain = ({ teasers, story, actors, id, loading }) => (
           <h2>Rating</h2>
           <RatingResultContainer id={id} />
         </section>
-        <section>
+        {/* <section>
           <h2>티저 영상</h2>
           <EpisodeItemList teasers={teasers} />
-        </section>
+        </section> */}
         <section>
           <h2>배우</h2>
           <ActorList actors={actors} />

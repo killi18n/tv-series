@@ -14,8 +14,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const api = require('./api');
+const ssr = require('./ssr');
 
-const buildPath = path.join(__dirname, '../../tv-series/build');
+const buildPath = path.join(__dirname, '../../tv-series-frontend/build');
 
 const {
   PORT: port = 4000,
@@ -35,6 +36,7 @@ const app = new Koa();
 const router = new Router();
 
 router.use('/api', api.routes());
+router.get('/', ssr);
 
 app.use(koaBody({ multipart: true }));
 app.use(bodyParser());
@@ -50,6 +52,7 @@ app.keys = [signKey];
 
 app.use(router.routes()).use(router.allowedMethods());
 app.use(serve(buildPath));
+app.use(ssr);
 
 app.listen(port, () => {
   console.log('app is listening port', port);

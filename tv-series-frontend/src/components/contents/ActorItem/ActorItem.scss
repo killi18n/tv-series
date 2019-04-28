@@ -1,31 +1,27 @@
 @import 'common';
 
 .ActorItem {
-    .thumbnail {
-        position: relative;
-        padding-top: 55%;
-        overflow: hidden;
-        img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            max-width: 100%;
-            transition: all 0.3s;
+  .thumbnail {
+    position: relative;
+    padding-top: 55%;
+    overflow: hidden;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      max-width: 100%;
+      transition: all 0.3s;
 
-            &:hover {
-                transform: scale(1.2);
-            }
-            
-          }
-        
-        
-
+      &:hover {
+        transform: scale(1.2);
+      }
     }
-    .name {
-        margin-top: 0.5rem;
-        font-weight: 500;
-    }
+  }
+  .name {
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
 }

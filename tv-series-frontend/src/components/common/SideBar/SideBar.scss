@@ -1,26 +1,26 @@
 @import 'common';
 
 .SideBar {
-    .contents {
-        display: flex;
-        flex-direction: column;
-        .menu {
-            .text {
-                font-size: 1.3rem;
-                font-weight: 500;
-                color: white;
-            }
-            padding: 1rem;
-            user-select: none;
-            cursor: pointer;
+  .contents {
+    display: flex;
+    flex-direction: column;
+    .menu {
+      .text {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: white;
+      }
+      padding: 1rem;
+      user-select: none;
+      cursor: pointer;
 
-            &:active {
-                background: $oc-gray-6;
-            }
-        }
-
-        .menu + .menu {
-            border-top: 1px solid white;
-        }
+      &:active {
+        background: $oc-gray-6;
+      }
     }
+
+    .menu + .menu {
+      border-top: 1px solid white;
+    }
+  }
 }

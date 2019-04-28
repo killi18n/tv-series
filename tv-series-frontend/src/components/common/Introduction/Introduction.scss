@@ -1,38 +1,37 @@
-
 @import 'common';
 
 .Introduction {
-    width: 1024px;
-    margin: 0 auto;
-    @include media("<=medium") {
-        width: 100%;
+  width: 1024px;
+  margin: 0 auto;
+  @include media('<=medium') {
+    width: 100%;
+  }
+
+  .contents {
+    background: white;
+    padding: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    @include material-shadow(4, 0.5);
+
+    .label {
+      font-size: 1.5rem;
+      font-weight: 600;
     }
 
-    .contents {
-        background: white;
-        padding: 1rem;
-        margin-top: 1rem;
-        display: flex;
-        flex-direction: column;
-
-        @include material-shadow(4, 0.5);
-
-        .label {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .description {
-            font-weight: 1.3rem;
-            font-weight: 500;
-        }
-
-        .label + .description {
-            margin-top: 1rem;
-        }
-
-        .description + .label {
-            margin-top: 1rem;
-        }
+    .description {
+      font-weight: 1.3rem;
+      font-weight: 500;
     }
+
+    .label + .description {
+      margin-top: 1rem;
+    }
+
+    .description + .label {
+      margin-top: 1rem;
+    }
+  }
 }
