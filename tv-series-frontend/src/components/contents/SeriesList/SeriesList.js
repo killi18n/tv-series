@@ -38,7 +38,9 @@ const SeriesList = ({ top4Rated, brand4 }) => {
         </Link>
       </div>
       <div className={cx('ListWrapper')}>
-        <div className={cx('inner')}>{top4List}</div>
+        <div className={cx('inner')}>
+          {top4List.length === 0 ? <div>hello!</div> : top4List}
+        </div>
       </div>
       <div className={cx('label')}>
         <div className={cx('left-label')}>Brand New Seires</div>
@@ -47,7 +49,9 @@ const SeriesList = ({ top4Rated, brand4 }) => {
         </Link>
       </div>
       <div className={cx('ListWrapper')}>
-        <div className={cx('inner')}>{brand4List}</div>
+        <div className={cx('inner')}>
+          {brand4List.length === 0 ? <div>hello!</div> : brand4List}
+        </div>
       </div>
     </div>
   );

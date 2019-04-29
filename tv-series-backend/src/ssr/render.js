@@ -11804,9 +11804,11 @@ var serverRender = function () {
 
             store = Object(__WEBPACK_IMPORTED_MODULE_8_store_configure__["a" /* default */])();
             url = ctx.url, origin = ctx.origin, cookies = ctx.cookies;
-            accessToken = cookies.get('access_token');
+
 
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.defaults.baseURL = origin;
+
+            accessToken = cookies.get('access_token');
 
             if (!accessToken) {
               _context.next = 7;
@@ -22887,7 +22889,11 @@ var SeriesList = function SeriesList(_ref) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: cx('inner') },
-        top4List
+        top4List.length === 0 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          'hello!'
+        ) : top4List
       )
     ),
     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -22910,7 +22916,11 @@ var SeriesList = function SeriesList(_ref) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: cx('inner') },
-        brand4List
+        brand4List.length === 0 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          'hello!'
+        ) : brand4List
       )
     )
   );

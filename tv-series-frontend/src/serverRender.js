@@ -13,9 +13,10 @@ const serverRender = async ctx => {
 
   const store = configure();
   const { url, origin, cookies } = ctx;
-  const accessToken = cookies.get('access_token');
+
   axios.defaults.baseURL = origin;
 
+  const accessToken = cookies.get('access_token');
   if (accessToken) {
     const html = ReactDOMServer.renderToString(
       <Provider store={store}>

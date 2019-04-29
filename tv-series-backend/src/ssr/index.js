@@ -6,7 +6,8 @@ function buildHtml({ html, preloadedState, error, isLoggedIn }) {
   if (error) {
     throw new Error(error);
   }
-  return `<!DOCTYPE html>
+  return `
+  <!DOCTYPE html>
   <html lang="en">
   
   <head>

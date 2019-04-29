@@ -23,7 +23,7 @@ export default function asyncComponent(getComponent) {
       if (Component) {
         return <Component {...this.props} />;
       }
-      return null;
+      return <div>Loading....</div>;
     }
   }
 
