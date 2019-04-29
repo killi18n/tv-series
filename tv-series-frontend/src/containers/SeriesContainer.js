@@ -8,10 +8,11 @@ import SeriesTemplate from 'components/contents/SeriesTemplate';
 import SeriesMain from 'components/contents/SeriesMain';
 import SeriesHeader from 'components/contents/SeriesHeader';
 // import data from 'data.json';
-import SideBarContainer from 'containers/SideBarContainer';
+// import SideBarContainer from 'containers/SideBarContainer';
 
 class SeriesContainer extends Component {
   componentDidMount() {
+    if (window.shouldCancel) return;
     this.getSeries();
   }
 
@@ -70,7 +71,7 @@ class SeriesContainer extends Component {
           teasers={series.teasers}
           actors={series.actors}
         />
-        <SideBarContainer />
+        {/* <SideBarContainer /> */}
       </SeriesTemplate>
     );
   }

@@ -134,19 +134,30 @@ exports.read = async ctx => {
 };
 
 exports.getTop4Rated = async ctx => {
-  const posts = await Post.find()
-    .sort({ good: -1, _id: -1 })
-    .limit(4)
-    .exec();
-  ctx.body = posts;
+  try {
+    const posts = await Post.find()
+      .sort({ good: -1, _id: -1 })
+      .limit(4)
+      .exec();
+    ctx.body = posts;
+    ctx.status = 200;
+  } catch (e) {
+    ctx.throw(e, 500);
+  }
 };
 
 exports.get4Brandnew = async ctx => {
-  const posts = await Post.find()
-    .sort({ firstBroadcasted: -1, _id: -1 })
-    .limit(4)
-    .exec();
-  ctx.body = posts;
+  try {
+    const posts = await Post.find()
+      .sort({ firstBroadcasted: -1, _id: -1 })
+      .limit(4)
+      .exec();
+
+    ctx.body = posts;
+    ctx.status = 200;
+  } catch (e) {
+    ctx.throw(e, 500);
+  }
 };
 
 exports.remove = async ctx => {

@@ -51,6 +51,12 @@ app.use(session(sessionConfig, app));
 app.keys = [signKey];
 
 app.use(router.routes()).use(router.allowedMethods());
+// app.use((ctx, next) => {
+//   if (ctx.cookies.get('access_token')) {
+//     return next();
+//   }
+// }, fallback());
+// app.use(fallback());
 app.use(serve(buildPath));
 app.use(ssr);
 

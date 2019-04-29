@@ -1,11 +1,12 @@
 const render = require('./render').default;
 const manifest = require('../../../tv-series-frontend/build/asset-manifest.json');
 
-function buildHtml({ html }) {
-  console.log('html hello', html);
+function buildHtml({ html, preloadedState, error, isLoggedIn }) {
   // const { title, meta } = helmet;
-  return `
-  <!DOCTYPE html>
+  if (error) {
+    throw new Error(error);
+  }
+  return `<!DOCTYPE html>
   <html lang="en">
   
   <head>
@@ -14,13 +15,22 @@ function buildHtml({ html }) {
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="/manifest.json">
     <link rel="shortcut icon" href="/favicon.ico">
-    <link href="/${manifest['main.css']}" rel="stylesheet">
+    <link href="/${manifest['app.css']}" rel="stylesheet">
   </head>
   
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">${html}</div>
-    <script type="text/javascript" src="/${manifest['main.js']}"></script>
+    <div id="root">${!isLoggedIn ? html : ''}</div>
+    ${
+      !isLoggedIn
+        ? `<script>
+      window.__PRELOADED_STATE__ = ${preloadedState};
+      window.shouldCancel = true;
+    </script>`
+        : ''
+    }
+    <script type="text/javascript" src="/${manifest['vendor.js']}"></script>
+    <script type="text/javascript" src="/${manifest['app.js']}"></script>
   </body>
   
   </html>`;
@@ -29,7 +39,6 @@ function buildHtml({ html }) {
 module.exports = async ctx => {
   try {
     const rendered = await render(ctx);
-
     ctx.body = buildHtml(rendered);
   } catch (e) {
     console.log(e);

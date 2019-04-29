@@ -7,6 +7,7 @@ import * as listActions from 'store/modules/list';
 
 class SeriesListContainer extends Component {
   componentDidMount() {
+    if (window.shouldCancel) return;
     this.getLists();
   }
 
@@ -17,7 +18,7 @@ class SeriesListContainer extends Component {
       await ListActions.getTop4Rated();
       await ListActions.getBrand4();
     } catch (e) {
-      throw new Error(e);
+      console.log(e);
     }
   };
 

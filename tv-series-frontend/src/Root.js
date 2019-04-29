@@ -1,10 +1,16 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import App from 'components/App';
 import { Provider } from 'react-redux';
+import transit from 'transit-immutable-js';
 import configure from 'store/configure';
+import App from 'components/App';
 
-const store = configure();
+const preloadedState =
+  typeof window !== 'undefined' &&
+  window.__PRELOADED_STATE__ &&
+  transit.fromJSON(window.__PRELOADED_STATE__);
+
+const store = configure(preloadedState);
 
 const Root = () => {
   return (

@@ -8,6 +8,7 @@ import * as listActions from 'store/modules/list';
 
 class CategoryListContainer extends Component {
   componentDidMount() {
+    if (window.shouldCancel) return;
     this.getAll();
   }
 
