@@ -30,7 +30,7 @@ class RatingContainer extends Component {
   };
 
   getRatedList = async () => {
-    const { RateActions, id, rated } = this.props;
+    const { RateActions, id } = this.props;
     const loggedInfo = storage.get('loggedInfo');
 
     if (!loggedInfo) {
@@ -39,6 +39,7 @@ class RatingContainer extends Component {
 
     try {
       await RateActions.getRatedList({ email: loggedInfo });
+      const { rated } = this.props;
       rated.toJS().forEach(rate => {
         if (rate.itemId === id) {
           if (rate.good === 1) {
@@ -67,11 +68,9 @@ class RatingContainer extends Component {
       this.getRatingOfItem();
       this.getRatedList();
     } catch (e) {
-      throw new Error(e);
+      console.log(e);
     }
   };
-
-  showAuthModal = () => {};
 
   render() {
     const { selected, liked, hated } = this.props;
