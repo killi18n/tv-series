@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as rateActions from 'store/modules/rate';
 import RatingResult from 'components/contents/RatingResult';
+import shouldCancel from 'lib/shouldCancel';
 
 class RatingResultContainer extends Component {
   componentDidMount() {
+    if (shouldCancel()) return;
     this.getRating();
   }
 

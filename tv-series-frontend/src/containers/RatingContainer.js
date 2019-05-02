@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
 import * as rateActions from 'store/modules/rate';
 import Rating from 'components/contents/Rating';
 import storage from 'lib/storage';
-import { withRouter } from 'react-router-dom';
+import shouldCancel from 'lib/shouldCancel';
 
 class RatingContainer extends Component {
   componentDidMount() {
+    if (shouldCancel()) return;
     this.initialize();
     this.getRatingOfItem();
     this.getRatedList();
