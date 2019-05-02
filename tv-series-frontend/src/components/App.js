@@ -9,7 +9,8 @@ import {
   NotFoundPage,
 } from 'pages';
 import Base from 'containers/Base';
-import RouteListener from '../lib/RouteListener';
+// import RouteListener from '../lib/RouteListener';
+import { Rendered } from 'lib/shouldCancel';
 
 const App = () => {
   return (
@@ -23,8 +24,8 @@ const App = () => {
         <Route component={NotFoundPage} />
         {/* <Route path="/auth/:what" component={AuthPage} /> */}
       </Switch>
+      <Rendered />
       <Base />
-      <RouteListener />
     </div>
   );
 };

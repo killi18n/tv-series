@@ -5,10 +5,11 @@ import { withRouter } from 'react-router-dom';
 import CategoryList from 'components/contents/CategoryList';
 import data from 'data.json';
 import * as listActions from 'store/modules/list';
+import shouldCancel from 'lib/shouldCancel';
 
 class CategoryListContainer extends Component {
   componentDidMount() {
-    if (window.shouldCancel) return;
+    if (shouldCancel()) return;
     this.getAll();
   }
 

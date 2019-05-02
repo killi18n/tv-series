@@ -4,10 +4,11 @@ import { bindActionCreators } from 'redux';
 import SeriesList from 'components/contents/SeriesList';
 import data from 'data.json';
 import * as listActions from 'store/modules/list';
+import shouldCancel from 'lib/shouldCancel';
 
 class SeriesListContainer extends Component {
   componentDidMount() {
-    if (window.shouldCancel) return;
+    if (shouldCancel()) return;
     this.getLists();
   }
 

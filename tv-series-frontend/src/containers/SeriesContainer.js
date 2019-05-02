@@ -7,12 +7,13 @@ import * as listActions from 'store/modules/list';
 import SeriesTemplate from 'components/contents/SeriesTemplate';
 import SeriesMain from 'components/contents/SeriesMain';
 import SeriesHeader from 'components/contents/SeriesHeader';
+import shouldCancel from 'lib/shouldCancel';
 // import data from 'data.json';
 // import SideBarContainer from 'containers/SideBarContainer';
 
 class SeriesContainer extends Component {
   componentDidMount() {
-    if (window.shouldCancel) return;
+    if (shouldCancel()) return;
     this.getSeries();
   }
 
